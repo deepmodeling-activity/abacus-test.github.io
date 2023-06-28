@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .description {
+            text-align: left;
+            display: inline-block;
+            font-family: Verdana, sans-serif;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="description">
+        <pre>
+Profile name:
+    - intel/gnu: intel or gnu compiler.
+    - omp: calculation command is: OMP_NUM_THREADS=16 mpirun -np 1 abacus, and others are: OMP_NUM_THREADS=1 mpirun -np 16 abacus.
+    - cg/dav: SCF calculation with cg or dav solver (PW basis set), and use <a href="https://github.com/deepmodeling-activity/abacus-test.github.io/tree/master/datasets/dataset1-pw" target="detail">PW dataset</a>.
+    - elpa/scalapack: SCF calculation with genelpa or scalapack_gvx (LCAO basis set), and use <a href="https://github.com/deepmodeling-activity/abacus-test.github.io/tree/master/datasets/dataset2-lcao" target="detail">LCAO dataset</a>.
+    - exx-test: testing on hybrid calculations, and use <a href="https://github.com/deepmodeling-activity/abacus-test.github.io/tree/master/datasets/dataset3-exx" target="detail">EXX dataset</a>.
+    - examples: testing on <a href="https://github.com/deepmodeling/abacus-develop/tree/develop/examples" target="detail">examples/</a> in ABACUS repository that containing allrun.sh script. 
+Metrics:
+    - NormalEnd_ratio: the ratio of the example number with normal ending.
+    - Converge_ratio: the ratio of the example number with SCF convergence.
+    - SCFConverge Score: the reciprocal of the geometric mean of the SCF convergence steps for all examples, and takes 50 steps as 100 points. 
+        The larger the value, the fewer steps required for convergence.
+    - Performance Score: the reciprocal of the geometric mean of total time for all examples, and takes the result of abacus v3.0.0 as the baseline. 
+        The larger the value, the less total time is consumed:
+        - cg/dav takes the result of v3.0.0 intel-cg as 100 points.
+        - genelpa/scalapack takes the result of v3.0.0 intel-elpa as 100 points.
+    - "--" means that the metrics is not calculated.
+
+Value in the bracket is the percentage increase compared to the last result.
+            </pre>
+    </div>
+</body>
+</html>

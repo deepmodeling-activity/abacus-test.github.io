@@ -7,7 +7,6 @@
     <style>
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
         }
         h1 {
             margin-bottom: 20px;
@@ -15,13 +14,13 @@
         iframe {
             border: none;
             width: 100%;
-            height: 500px;
         }
     </style>
 </head>
 <body>
     <h1>ABACUS Test Report</h1>
     <iframe src="result.html" onload="resizeIframe(this)"></iframe>
+    <iframe src="comment.html" onload="resizeIframe(this)"></iframe>
     <script>
         function resizeIframe(obj) {
             obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
