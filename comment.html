@@ -8,18 +8,17 @@
             text-align: center;
         }
 
-        .description {
+        pre {
+            font-family: Verdana, sans-serif;
             text-align: left;
             display: inline-block;
-            font-family: Verdana, sans-serif;
-            font-size: 18px;
+            font-size: 16px;
         }
     </style>
 </head>
 
 <body>
-    <div class="description">
-        <pre>
+    <pre>
 Profile name:
     - intel/gnu: intel or gnu compiler.
     - omp: calculation command is: OMP_NUM_THREADS=16 mpirun -np 1 abacus, and others are: OMP_NUM_THREADS=1 mpirun -np 16 abacus.
@@ -40,6 +39,7 @@ Metrics:
 
 Value in the bracket is the percentage increase compared to the last result.
             </pre>
-    </div>
+
 </body>
+
 </html>
