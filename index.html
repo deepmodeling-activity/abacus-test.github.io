@@ -6,14 +6,20 @@
     <title>ABACUS Test Report</title>
     <style>
         body {
-            text-align: center;
+            text-align: left;
+            margin-left: 50px;
         }
         h1 {
             margin-bottom: 20px;
+            margin-left: 450px;
         }
         iframe {
+            margin-left: 50px;
             border: none;
+            text-align: left;
             width: 100%;
+            scroll-behavior: smooth;
+            box-sizing: content-box;
         }
     </style>
 </head>
@@ -21,6 +27,7 @@
     <h1>ABACUS Test Report</h1>
     <iframe src="result.html" onload="resizeIframe(this)"></iframe>
     <iframe src="comment.html" onload="resizeIframe(this)"></iframe>
+    <iframe src="all.html" onload="resizeIframe(this)"></iframe>
     <script>
         function resizeIframe(obj) {
             obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
