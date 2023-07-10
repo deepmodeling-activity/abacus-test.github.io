@@ -6,32 +6,107 @@
     <title>ABACUS Test Report</title>
     <style>
         body {
-            text-align: left;
-            margin-left: 50px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
         }
         h1 {
             margin-bottom: 20px;
-            margin-left: 450px;
+            text-align: center;
         }
         iframe {
-            margin-left: 50px;
             border: none;
             text-align: left;
             width: 100%;
             scroll-behavior: smooth;
             box-sizing: content-box;
         }
+
+        .window {
+            width: 80%;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #f4f4f4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+                        0 1px 3px rgba(0, 0, 0, 0.08);
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .content {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .responsive-image {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
-    <h1>ABACUS Test Report</h1>
-    <iframe src="result.html" onload="resizeIframe(this)"></iframe>
-    <iframe src="comment.html" onload="resizeIframe(this)"></iframe>
-    <iframe src="all.html" onload="resizeIframe(this)"></iframe>
+    
+
+    <div class="window">
+        <h1>ABACUS Test Report</h1>
+
+        <button id="button1">Performance Test</button>
+        <button id="button2">Delta Test</button>
+
+        <div id="content1" class="content active">
+            <iframe src="performance/result.html" onload="resizeIframe(this)"></iframe>
+            <iframe src="performance/comment.html" onload="resizeIframe(this)"></iframe>
+            <iframe src="performance/all.html" onload="resizeIframe(this)"></iframe>
+        </div>
+
+        <div id="content2" class="content active">
+            <iframe src="deltatest/deltatest.html" onload="resizeIframe(this)"></iframe>
+        </div>
+
+        <script>
+            function resizeIframe(obj) {
+                obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+            }
+        </script>
+
+    </div>
+
     <script>
-        function resizeIframe(obj) {
-            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        // 获取按钮元素和内容元素
+        const button1 = document.getElementById('button1');
+        const button2 = document.getElementById('button2');
+//        const button3 = document.getElementById('button3');
+        const content1 = document.getElementById('content1');
+        const content2 = document.getElementById('content2');
+//        const content3 = document.getElementById('content3');
+
+        // 定义一个函数，用于显示指定的内容并隐藏其他内容
+        function showContent(contentToShow) {
+            content1.classList.remove('active');
+            content2.classList.remove('active');
+//            content3.classList.remove('active');
+            contentToShow.classList.add('active');
         }
+
+        // 为按钮添加点击事件监听器
+        button1.addEventListener('click', () => showContent(content1));
+        button2.addEventListener('click', () => showContent(content2));
+//        button3.addEventListener('click', () => showContent(content3));
     </script>
 </body>
 </html>
