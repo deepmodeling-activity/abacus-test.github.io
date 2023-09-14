@@ -7,24 +7,26 @@
         body {
             text-align: left;
         }
-
-        pre {
+        .doc {
             font-family: Verdana, sans-serif;
             text-align: left;
             display: inline-block;
             font-size: 16px;
+            width: 75%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
         }
     </style>
 </head>
 
 <body>
-    <pre>
-    Test date: 2023-07-11. 
-    Version  : v3.2.5(3237578 (Tue Jul 11 13:49:00 2023 +0800))
+    <div class="doc">
+    Test date: 2023-09-13. 
+    Version  : v3.3.4(b49a78a (Tue Sep 12 11:37:43 2023 +0000))
 
         Delta test is an error analysis method to reflect the difference between two DFT implementations. For delta test, please refer to https://doi.org/10.1080/10408436.2013.772503.
     Below is the results between ABACUS PW basis and WIEN2K. The reference WIEN2K data is from: https://github.com/molmod/DeltaCodesDFT.
-    </pre>
+    </doc>
     <img src="Delta-out.png" alt="ABACUS Delta Test" class="responsive-image">
 
 </body>

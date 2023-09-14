@@ -1,0 +1,234 @@
+{
+    "HSERef": {
+        "IV/C": {
+            "band_gap": 5.49
+        },
+        "IV/Si": {
+            "band_gap": 1.28
+        },
+        "IV/Ge": {
+            "band_gap": 0.56
+        },
+        "IV/Sn": {
+            "band_gap": null
+        },
+        "III-V-Cubic/AlN": {
+            "band_gap": null
+        },
+        "III-V-Cubic/AlP": {
+            "band_gap": 2.52
+        },
+        "III-V-Cubic/AlAs": {
+            "band_gap": 2.24
+        },
+        "III-V-Cubic/AlSb": {
+            "band_gap": 1.99
+        },
+        "III-V-Cubic/GaN": {
+            "band_gap": 3.03
+        },
+        "III-V-Cubic/GaP": {
+            "band_gap": 2.47
+        },
+        "III-V-Cubic/GaAs": {
+            "band_gap": 1.21
+        },
+        "III-V-Cubic/GaSb": {
+            "band_gap": 0.72
+        },
+        "III-V-Cubic/InN": {
+            "band_gap": null
+        },
+        "III-V-Cubic/InP": {
+            "band_gap": 1.64
+        },
+        "III-V-Cubic/InAs": {
+            "band_gap": 0.39
+        },
+        "III-V-Cubic/InSb": {
+            "band_gap": 0.29
+        },
+        "III-V-Hexagonal/AlN": {
+            "band_gap": 6.45
+        },
+        "III-V-Hexagonal/AlP": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/AlAs": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/AlSb": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/GaN": {
+            "band_gap": 3.21
+        },
+        "III-V-Hexagonal/GaP": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/GaAs": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/GaSb": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/InN": {
+            "band_gap": 0.71
+        },
+        "III-V-Hexagonal/InP": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/InAs": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/InSb": {
+            "band_gap": null
+        },
+        "cubic1/BAs": {
+            "band_gap": 1.92
+        },
+        "cubic1/BN": {
+            "band_gap": 5.98
+        },
+        "cubic1/CdS": {
+            "band_gap": 2.14
+        },
+        "cubic1/CdSe": {
+            "band_gap": 1.39
+        },
+        "cubic1/CdTe": {
+            "band_gap": 1.52
+        },
+        "cubic1/ZnS": {
+            "band_gap": 3.42
+        },
+        "hcp1/BAs": {
+            "band_gap": null
+        },
+        "hcp1/CdS": {
+            "band_gap": null
+        },
+        "hcp1/CdSe": {
+            "band_gap": null
+        },
+        "hcp1/CdTe": {
+            "band_gap": null
+        }
+    },
+    "exp": {
+        "IV/C": {
+            "band_gap": 5.48
+        },
+        "IV/Si": {
+            "band_gap": 1.17
+        },
+        "IV/Ge": {
+            "band_gap": 0.74
+        },
+        "IV/Sn": {
+            "band_gap": null
+        },
+        "III-V-Cubic/AlN": {
+            "band_gap": null
+        },
+        "III-V-Cubic/AlP": {
+            "band_gap": 2.51
+        },
+        "III-V-Cubic/AlAs": {
+            "band_gap": 2.23
+        },
+        "III-V-Cubic/AlSb": {
+            "band_gap": 1.68
+        },
+        "III-V-Cubic/GaN": {
+            "band_gap": 3.3
+        },
+        "III-V-Cubic/GaP": {
+            "band_gap": 2.35
+        },
+        "III-V-Cubic/GaAs": {
+            "band_gap": 1.52
+        },
+        "III-V-Cubic/GaSb": {
+            "band_gap": 0.73
+        },
+        "III-V-Cubic/InN": {
+            "band_gap": null
+        },
+        "III-V-Cubic/InP": {
+            "band_gap": 1.42
+        },
+        "III-V-Cubic/InAs": {
+            "band_gap": 0.41
+        },
+        "III-V-Cubic/InSb": {
+            "band_gap": 0.23
+        },
+        "III-V-Hexagonal/AlN": {
+            "band_gap": 6.13
+        },
+        "III-V-Hexagonal/AlP": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/AlAs": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/AlSb": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/GaN": {
+            "band_gap": 3.5
+        },
+        "III-V-Hexagonal/GaP": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/GaAs": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/GaSb": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/InN": {
+            "band_gap": 0.69
+        },
+        "III-V-Hexagonal/InP": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/InAs": {
+            "band_gap": null
+        },
+        "III-V-Hexagonal/InSb": {
+            "band_gap": null
+        },
+        "cubic1/BAs": {
+            "band_gap": 1.46
+        },
+        "cubic1/BN": {
+            "band_gap": 6.22
+        },
+        "cubic1/CdS": {
+            "band_gap": 2.55
+        },
+        "cubic1/CdSe": {
+            "band_gap": 1.9
+        },
+        "cubic1/CdTe": {
+            "band_gap": 1.92
+        },
+        "cubic1/ZnS": {
+            "band_gap": 3.66
+        },
+        "hcp1/BAs": {
+            "band_gap": null
+        },
+        "hcp1/CdS": {
+            "band_gap": null
+        },
+        "hcp1/CdSe": {
+            "band_gap": null
+        },
+        "hcp1/CdTe": {
+            "band_gap": null
+        }
+    }
+}
