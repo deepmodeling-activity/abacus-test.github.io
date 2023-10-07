@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        table {
+            width: 85%;
+            text-align: center;
+        }
+
+        .note {
+            width: 75%;
+            text-align: left;
+            display: inline-block;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="doc">
+    <br>
+    Test date: 2023-09-27. 
+    <br>
+    Version  : v3.3.4(4a6d764 (Tue Sep 26 14:08:49 2023 +0000))
+    <br>
+    <br>
+    The precision tests of the mathematical library mainly focus on the accuracy, convergence, and stability of the ABACUS mathematical function calculations, as well as the consistency of the results across different computing platforms. Currently, we have provided precision error analysis charts for the Sphere Bessel Function of the First Kind and Simpson Integral, which are involved in the two-center integral calculations.
+    <br>
+    <br>
+    <br>
+    </doc>
+</body>
+
+<body>
+    <center><h3>Table 1. Error Analysis of Sphere Bessel Function of the First Kind</h3></center>
+    <center>
+    <table border="2px">
+        <thead><tr><th title="Field #1">Order</th>
+        <th title="Field #2">l = 0</th>
+        <th title="Field #3">l = 1</th>
+        <th title="Field #4">l = 2</th>
+        <th title="Field #5">l = 3</th>
+        <th title="Field #6">l = 4</th>
+        <th title="Field #7">l = 5</th>
+        <th title="Field #8">l = 6</th>
+        <th title="Field #9">l = 7</th>
+        <th title="Field #10">l = 8</th>
+        <th title="Field #11">l = 9</th>
+        <th title="Field #12">l = 10</th>
+        <th title="Field #13">l = 11</th>
+        </tr></thead>
+        <tbody><tr>
+        <td>Old-Besselj(GNU)</td>
+        <td> Max: 1.94e-15 (Mean: 8.22e-16) </td>
+        <td> Max: 3.78e-14 (Mean: 4.87e-16) </td>
+        <td> Max: 5.33e-11 (Mean: 3.10e-14) </td>
+        <td> Max: 2.22e-07 (Mean: 5.49e-11) </td>
+        <td> Max: 1.39e-02 (Mean: 3.01e-06) </td>
+        <td> Max: 4.99e-09 (Mean: 3.55e-11) </td>
+        <td> Max: 4.96e-09 (Mean: 5.77e-11) </td>
+        <td> Max: 5.33e-10 (Mean: 7.87e-11) </td>
+        <td> Max: 1.71e-10 (Mean: 2.17e-11) </td>
+        <td> Max: 4.82e-11 (Mean: 5.37e-12) </td>
+        <td> Max: 1.21e-11 (Mean: 1.21e-12) </td>
+        <td> Max: 2.76e-12 (Mean: 2.49e-13) </td>
+        </tr>
+        <tr>
+        <td>Old-Besselj(Intel)</td>
+        <td> Max: 1.94e-15 (Mean: 8.22e-16) </td>
+        <td> Max: 3.78e-14 (Mean: 4.87e-16) </td>
+        <td> Max: 5.33e-11 (Mean: 3.10e-14) </td>
+        <td> Max: 2.22e-07 (Mean: 5.49e-11) </td>
+        <td> Max: 1.39e-02 (Mean: 3.01e-06) </td>
+        <td> Max: 4.99e-09 (Mean: 3.55e-11) </td>
+        <td> Max: 4.96e-09 (Mean: 5.77e-11) </td>
+        <td> Max: 5.33e-10 (Mean: 7.87e-11) </td>
+        <td> Max: 1.71e-10 (Mean: 2.17e-11) </td>
+        <td> Max: 4.82e-11 (Mean: 5.37e-12) </td>
+        <td> Max: 1.21e-11 (Mean: 1.21e-12) </td>
+        <td> Max: 2.76e-12 (Mean: 2.49e-13) </td>
+        </tr>
+        <tr>
+        <td>New-Besselj(GNU)</td>
+        <td> Max: 1.94e-15 (Mean: 8.21e-16) </td>
+        <td> Max: 3.50e-15 (Mean: 4.27e-16) </td>
+        <td> Max: 2.39e-15 (Mean: 4.43e-16) </td>
+        <td> Max: 2.16e-15 (Mean: 2.35e-16) </td>
+        <td> Max: 9.16e-16 (Mean: 8.89e-17) </td>
+        <td> Max: 1.67e-16 (Mean: 1.31e-17) </td>
+        <td> Max: 7.63e-17 (Mean: 4.10e-18) </td>
+        <td> Max: 4.51e-17 (Mean: 3.05e-18) </td>
+        <td> Max: 1.21e-17 (Mean: 4.04e-19) </td>
+        <td> Max: 3.04e-18 (Mean: 1.12e-19) </td>
+        <td> Max: 1.57e-18 (Mean: 9.54e-20) </td>
+        <td> Max: 4.88e-19 (Mean: 2.52e-20) </td>
+        </tr>
+        <tr>
+        <td>New-Besselj(Intel)</td>
+        <td> Max: 1.94e-15 (Mean: 8.21e-16) </td>
+        <td> Max: 3.50e-15 (Mean: 4.27e-16) </td>
+        <td> Max: 2.39e-15 (Mean: 4.43e-16) </td>
+        <td> Max: 2.16e-15 (Mean: 2.35e-16) </td>
+        <td> Max: 9.16e-16 (Mean: 8.89e-17) </td>
+        <td> Max: 1.67e-16 (Mean: 1.31e-17) </td>
+        <td> Max: 7.63e-17 (Mean: 4.10e-18) </td>
+        <td> Max: 4.51e-17 (Mean: 3.05e-18) </td>
+        <td> Max: 1.21e-17 (Mean: 4.04e-19) </td>
+        <td> Max: 3.04e-18 (Mean: 1.12e-19) </td>
+        <td> Max: 1.57e-18 (Mean: 9.54e-20) </td>
+        <td> Max: 4.88e-19 (Mean: 2.52e-20) </td>
+        </tr>
+        </tbody></table>
+        </center>
+        </br>
+        </br>
+        <div class="note">Note:
+            - The reference results are calculated by Octave.
+            - Sphere Bessel Function of the First Kind are performed on 5,000 grid points in the interval of (0,5).
+            - Old-Besselj is referred to <i>ModuleBase::Sphbes::Spherical_Bessel</i> in ABACUS.
+            - New-Besselj is referred to <i>ModuleBase::Sphbes::sphbesj</i> in ABACUS.
+            - Tests are performed on GNU and Intel compilers in ABACUS docker environment.</note>
+</body>
+
+</br>
+</br>
+<body>
+    <center><h3>Figure 1. Error Analysis of Simpson Integral</h3></center>
+    <div style="display: flex; justify-content: center;">
+        <img src="figs/inv-simpson.jpg" style="width: 30%; margin-right: 10px;">
+        <img src="figs/exp-simpson.jpg" style="width: 30%; margin-left: 10px;">
+      </div>
+    </br>
+    <div class="note">Note:
+        - Error analysis of Simpson Integral are performed on f(x) = 1 / (1 + x*x )and f(x) = exp(x).
+        - Both uniform and non-uniform grids are tested.
+        - Tests are performed on GNU and Intel compilers in ABACUS docker environment.</note>
+</body>
+
+</html>
