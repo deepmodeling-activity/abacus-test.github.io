@@ -8,6 +8,24 @@
             text-align: left;
         }
 
+        .title{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
+        .title1{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
+        .tablehead{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
         .doc {
             font-family: Verdana, sans-serif;
             text-align: left;
@@ -17,19 +35,49 @@
             word-wrap: break-word;
             white-space: pre-wrap;
         }
+
     </style>
 </head>
 
 <body>
     <div class="doc">
-    Test date: 2023-09-27. 
-    Version  : v3.3.4(4a6d764 (Tue Sep 26 14:08:49 2023 +0000))
+Test date: 2023-09-27. 
+Version  : v3.3.4(4a6d764 (Tue Sep 26 14:08:49 2023 +0000))
+    </div>
+    
+    <div class="title">1. Introduction</div>
 
-        This test performs calculations on a series of systems using the HSE hybrid functional, and compares the band gap between abacus and reference HSE and experimental values. The reference value is from: 10.1021/acs.jpclett.8b00919 and 10.1021/acs.jpclett.0c00481. Total 21 systems are tested, including AlAs, AlN-WZ, AlP, AlSb, BN, BP, C, CdS-WZ, CdSe-WZ, CdTe, GaAs, GaP, InP, LiF, MgS, NaCl, Si, SiC, ZnS, ZnSe, ZnTe.
+    <div class="doc">
+        The bandgap is a key parameter for semiconductor systems, and in this test, we employed the ABACUS package in conjunction with the HSE hybrid functional to calculate the bandgaps of a series of typical semiconductors. Furthermore, we compared the results between abacus and reference HSE and experimental values. The reference values are obtained from the following sources: 10.1021/acs.jpclett.8b00919 and 10.1021/acs.jpclett.0c00481.
         
         Click <a href="https://github.com/deepmodeling-activity/abacus-test.github.io/tree/master/datasets/semi-conductor" target="detail">here</a> to check the ABACUS inputs.
         Click <a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fsched-abacustest-sc-test-08bb50" target="detail">here</a> to check more details of the calculations.
     </div>
+
+    <div class="title">2. Results</div>
+
+    <div class="doc">
+        The band gap of each system, calculated by ABACUS, along with the reference computed values from other software and experimental values, is presented in the following table. The values are in eV. The mean absolute error (<strong>MAE</strong>), and mean absolute relative error (<strong>MARE</strong>) of the results from different methods with respect to the experimental value are also listed.
+    </div>
+
+    <div class="tablehead">
+        Table. Band gap (eV) of each system, calculated by different softwares and experimental values.</div>
+
+    <div class="doc"><iframe src="summary.html" onload="resizeIframe(this)" width="100%" frameborder="0"></iframe>
+Note: <strong>comp_ref_mean</strong> is the average of values obtained from QE, FHI-AIMS, and VASP. <strong>RE(expt,%)</strong>  represents the relative deviation of ABACUS from the experimental value. <strong>RE(comp_ref_mean,%)</strong> represents the relative deviation of ABACUS from the comp_ref_mean. The absolute values of RE(comp_ref_mean,%) less than <strong>10%</strong> are marked in <font color="green">green</font>, and the others are marked in <font color="red">red</font>.
+    </div>
+    
+    <div class="doc">
+        <img src="all-percent.png" alt="ABACUS Delta Test" class="responsive-image" width="900" height="600">
+    </div>
+
+    <div class="tablehead">Figure. Band gap of each system calculated by different softwares and experimental values, and the relative error from experimental values.</div>
+
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight) + 'px';
+        }
+    </script>
 
 </body>
 

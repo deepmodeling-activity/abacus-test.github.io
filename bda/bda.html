@@ -8,6 +8,24 @@
             text-align: left;
         }
 
+        .title{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
+        .title1{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
+        .tablehead{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
         .doc {
             font-family: Verdana, sans-serif;
             text-align: left;
@@ -22,13 +40,40 @@
 
 <body>
     <div class="doc">
-    Test date: 2023-09-27. 
-    Version  : v3.3.4(4a6d764 (Tue Sep 26 14:08:49 2023 +0000))
+Test date: 2023-09-27. 
+Version  : v3.3.4(4a6d764 (Tue Sep 26 14:08:49 2023 +0000))
+    </div>
 
-        This test performs calculations on a series of battery material systems using DFT+U, and statistically evaluates the convergence performance of SCF, the atomic magnetic moment, and voltage.
+    <div class="title">1. Introduction</div>
+
+    <div class="doc">
+        Simulation of battery materials is of great significance. In this test, ab-initio calculations were carried out on a series of typical battery systems (combination of Li/Na and Fe/Co/Ni/Mn/CrO2) using ABACUS combined with the +U. Self-consistent field (SCF) calculations were performed, and the voltages were also calculated and compared with the results obtained using Vienna Ab initio Simulation Package (VASP).
+
         Click <a href="https://github.com/deepmodeling-activity/abacus-test.github.io/tree/master/datasets/battery" target="detail">here</a> to check the ABACUS inputs.
         Click <a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fsched-abacustest-bda-test-f0160f" target="detail">here</a> to check more details of the calculations.
     </div>
+
+    <div class="title">2. Results
+    </div>
+    <div class="title1">2.1 Statistical metrics</div>
+
+    <div class="doc">
+        This test evaluates the calculation normal termination ratio, SCF convergence ratio, maximum number of steps used for SCF convergence, as well as the maximum deviation ratio and correlation coefficient between the voltage calculated by ABACUS and the VASP reference results, and the accuracy of computed atomic magnetic moments.
+        <iframe src="supermetrics_summary.html" onload="resizeIframe(this)" width="100%" frameborder="0"></iframe></div>
+    <div class="title1">2.1 Voltage</div>
+
+    <div class="doc">
+        The voltage calculated by ABACUS vs VASP.
+
+        <img src="vs.png" alt="ABACUS Delta Test" class="responsive-image" width="600" height="400">
+    </div>
+    
+    
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight) + 'px';
+        }
+    </script>
 
 </body>
 
