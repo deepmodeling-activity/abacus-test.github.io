@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: left;
+        }
+
+        .title{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
+        .title1{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
+        .tablehead{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+
+        .doc {
+            font-family: Verdana, sans-serif;
+            text-align: left;
+            display: inline-block;
+            font-size: 16px;
+            width: 75%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="doc">
+Test date: 2023-10-25. 
+Version  : v3.4.0(223e00c (Wed Oct 25 05:02:40 2023 +0000))
+    </div>
+    
+    <div class="title">1. Introduction</div>
+
+    <div class="doc">
+        By performing symmetry analysis, we can effectively improve the computational efficiency and accuracy. In this test, we have used ABACUS to calculate a series of crystal configurations with and without considering symmetry, and compared their energy differences, maximum force deviations, and maximum stress deviations. We hope that this test can reflect the accuracy of the symmetry module in ABACUS. 
+        
+        Click <a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-abacustest-v0.3.45-83e440" target="detail">here</a> to check more details of the calculations.
+    </div>
+
+    <div class="title">2. Results</div>
+
+    <div class="tablehead">
+        Table. The point group obtained from ABACUS, as well as the comparison with the energy/force/stress when turning off symmetry analysis.</div>
+
+    <div class="doc"><iframe src="results.html" onload="resizeIframe(this)" width="100%" frameborder="0"></iframe>
+    </div>
+    
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight) + 'px';
+        }
+    </script>
+
+</body>
+
+</html>
