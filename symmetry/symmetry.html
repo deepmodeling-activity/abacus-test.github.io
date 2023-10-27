@@ -41,8 +41,8 @@
 
 <body>
     <div class="doc">
-Test date: 2023-10-25. 
-Version  : v3.4.0(223e00c (Wed Oct 25 05:02:40 2023 +0000))
+Test date: 2023-10-27. 
+Version  : v3.4.1(77f178d (Thu Oct 26 11:32:59 2023 +0800))
     </div>
     
     <div class="title">1. Introduction</div>
@@ -50,13 +50,19 @@ Version  : v3.4.0(223e00c (Wed Oct 25 05:02:40 2023 +0000))
     <div class="doc">
         By performing symmetry analysis, we can effectively improve the computational efficiency and accuracy. In this test, we have used ABACUS to calculate a series of crystal configurations with and without considering symmetry, and compared their energy differences, maximum force deviations, and maximum stress deviations. We hope that this test can reflect the accuracy of the symmetry module in ABACUS. 
         
-        Click <a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-abacustest-v0.3.45-83e440" target="detail">here</a> to check more details of the calculations.
+        Click <a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fsched-abacustest-symmetry-0c24bb" target="detail">here</a> to check more details of the calculations.
     </div>
 
     <div class="title">2. Results</div>
+    <div class="doc">
+        <img src="all.png" alt="ABACUS Delta Test" class="responsive-image" width="800" height="600"></div>
 
-    <div class="tablehead">
-        Table. The point group obtained from ABACUS, as well as the comparison of energy/force/stress with symmetry analysis turned off.</div>
+    <div class="tablehead">Figure. the diffrence of energy_per_atom/force/stress between turn off and turn on symmetry.
+
+    </div>
+    
+
+    <div class="tablehead">Table. The point group obtained from ABACUS, as well as the comparison of energy/force/stress with symmetry analysis turned off.</div>
 
     <div class="doc"><iframe src="results.html" onload="resizeIframe(this)" width="100%" frameborder="0"></iframe>
     </div>
