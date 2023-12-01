@@ -1,0 +1,203 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: left;
+        }
+        
+        .head1{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+        
+        .head2{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+        
+        .head3{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+
+        .tabletitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+        
+        .imagetitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+
+        .doc {
+            font-family: Verdana, sans-serif;
+            text-align: left;
+            display: inline-block;
+            font-size: 16px;
+            width: 100%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+        
+        #keys table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        #keys td {
+          border: none;
+          padding: 5px;
+          text-align: left;
+          line-height: 0.8;
+        }
+        
+        img {
+            max-width: 600px;
+            height: auto;
+            cursor: zoom-in;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-out;
+        }
+    </style>
+</head>
+
+<body>
+	<table id="keys">
+		<tr><td><strong>Test_date</strong></td><td>:</td><td>2023-12-01</td></tr>
+		<tr><td><strong>Version</strong></td><td>:</td><td>v3.3.4</td></tr>
+		<tr><td><strong>Job_address</strong></td><td>:</td><td></td></tr>
+		<tr><td><strong>Targets</strong></td><td>:</td><td>CPU VS DCU</td></tr>
+		<tr><td><strong>Datasets</strong></td><td>:</td><td><a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fdatasets%2Falloy">link</a></td></tr>
+		<tr><td><strong>Properties</strong></td><td>:</td><td>energy/force/stress/virial</td></tr>
+	</table>
+
+	<div class="head1">1. Introduction</div>
+	<div class="doc">    This test utilized ABACUS to perform the SCF calculations on a series of alloy systems (structures are downloaded from <a href="https://legacy.materialsproject.org/">material project</a>) containing various elements. We compared the results performed on CPU device and DCU device. Both calculations use the plane wave basis and use ks_solver dav. The CPU calculations are performed on <a href="https://bohrium.dp.tech/home">Bohrium</a> platform, and the DCU calculations are performed on <a href="https://ac.sugon.com/ui/acw/index.html#/">Sugon</a> platform.</div>
+	<div class="head1">2. Results</div>
+	<div class="head2">2.1 Accuracy</div>
+	<div class="doc">    Firstly, we should ensure that the calculation results of the DCU are reliable, and in this section we mainly compared the difference in energy/force/stress calculated by the DCU and the CPU. The results of CPU can be found in <a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-abacustest-v0.3.68-2506e6">here</a>.</div>
+	<div class="tabletitle">Table 1. The results of calcualtion on DCU, and the deviation of energy/force/virial/stress between CPU and DCU. MaxDeltaF(MaxDeltaVirial/atom, MaxDeltaS) is the maximum absolute deviation of force (virial per atom, stress) between CPU and DCU. </div>
+<div class="head2">Pass/Total: <font color="red">36/43 (83.72%)</font></div>
+
+    <table border="2px">
+        <tbody>
+            <tr>
+                <td>Key</td>
+                <td>Pass/Total</td>
+                <td>Criteria</td>
+            </tr>
+        <tr>
+                <td>normal_end</td>
+                <td style="color:green">43/43</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>converge</td>
+                <td style="color:green">43/43</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>DeltaEnergy/atom(meV)</td>
+                <td style="color:green">43/43</td> 
+                <td>x < 1</td>
+            </tr>
+        <tr>
+                <td>MaxDeltaF(eV/A)</td>
+                <td style="color:red">36/43</td> 
+                <td>x < 0.01</td>
+            </tr>
+        <tr>
+                <td>MaxDeltaVirial/atom(meV)</td>
+                <td style="color:green">43/43</td> 
+                <td>x < 10</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+	<table border="2px">
+		<thead><tr><th>example</th><th>normal_end</th><th>converge</th><th>SCF_step(dcu)</th><th>SCF_step(cpu)</th><th>DeltaEnergy/atom(meV)</th><th>MaxDeltaF(eV/A)</th><th>MaxDeltaVirial/atom(meV)</th><th>MaxDeltaS(kbar)</th></tr></thead>
+		<tbody>			<tr><td>000_Ag_Au_Cd</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td>11</td><td><font color="green">-1.98e-04</font></td><td><font color="green">2.58e-04</font></td><td><font color="green">1.48</font></td><td>0.12</td></tr>
+			<tr><td>001_Ag_Ce_Mg</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td>11</td><td><font color="green">-8.15e-05</font></td><td><font color="green">9.70e-04</font></td><td><font color="green">0.03</font></td><td>1.85e-03</td></tr>
+			<tr><td>002_Al_Fe_Ni</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>15</td><td>13</td><td><font color="green">5.31e-03</font></td><td><font color="red">0.02</font></td><td><font color="green">8.45</font></td><td>1.12</td></tr>
+			<tr><td>003_Al_Ti_V</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>19</td><td>20</td><td><font color="green">3.04e-03</font></td><td><font color="green">1.25e-03</font></td><td><font color="green">4.80</font></td><td>0.47</td></tr>
+			<tr><td>004_Au_Cd_K</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td>11</td><td><font color="green">-3.64e-07</font></td><td><font color="green">5.10e-07</font></td><td><font color="green">3.55e-03</font></td><td>1.56e-04</td></tr>
+			<tr><td>005_Be_Cr_Fe</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>17</td><td>16</td><td><font color="green">-1.81e-03</font></td><td><font color="green">7.94e-03</font></td><td><font color="green">3.71</font></td><td>0.58</td></tr>
+			<tr><td>006_Ca_Ni</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>19</td><td>19</td><td><font color="green">-4.22e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td></tr>
+			<tr><td>007_Cd_Cu_Hf</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td>11</td><td><font color="green">-1.23e-07</font></td><td><font color="green">1.70e-07</font></td><td><font color="green">2.77e-04</font></td><td>2.70e-05</td></tr>
+			<tr><td>008_Cd_Mg</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>19</td><td>18</td><td><font color="green">-1.06e-04</font></td><td><font color="red">0.03</font></td><td><font color="green">1.39</font></td><td>0.10</td></tr>
+			<tr><td>009_Cd_Na</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td>11</td><td><font color="green">-2.13e-04</font></td><td><font color="red">0.02</font></td><td><font color="green">3.96</font></td><td>0.26</td></tr>
+			<tr><td>010_Ce_Cu</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td>10</td><td><font color="green">9.22e-05</font></td><td><font color="red">0.06</font></td><td><font color="green">5.44</font></td><td>0.56</td></tr>
+			<tr><td>011_Ce_Li_Ru</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td>9</td><td><font color="green">2.53e-07</font></td><td><font color="green">1.13e-06</font></td><td><font color="green">9.64e-05</font></td><td>7.00e-06</td></tr>
+			<tr><td>012_Co_Cr_Ga</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>19</td><td>19</td><td><font color="green">2.45e-07</font></td><td><font color="green">6.00e-07</font></td><td><font color="green">2.12e-03</font></td><td>2.83e-04</td></tr>
+			<tr><td>013_Co_La</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>23</td><td>23</td><td><font color="green">-2.24e-04</font></td><td><font color="green">9.31e-03</font></td><td><font color="green">0.37</font></td><td>0.03</td></tr>
+			<tr><td>014_Co_Mg_Nd</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>19</td><td>19</td><td><font color="green">-2.66e-04</font></td><td><font color="red">0.03</font></td><td><font color="green">2.69</font></td><td>0.16</td></tr>
+			<tr><td>015_Co_Mg_Tb</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td>14</td><td><font color="green">-1.63e-04</font></td><td><font color="green">2.10e-03</font></td><td><font color="green">0.19</font></td><td>0.02</td></tr>
+			<tr><td>016_Co_Nb_Sn</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td>11</td><td><font color="green">-4.09e-07</font></td><td><font color="green">3.60e-07</font></td><td><font color="green">4.14e-04</font></td><td>4.40e-05</td></tr>
+			<tr><td>017_Co_Y</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>18</td><td>19</td><td><font color="green">8.70e-04</font></td><td><font color="green">9.23e-03</font></td><td><font color="green">1.05</font></td><td>0.12</td></tr>
+			<tr><td>018_Cu_Dy_In</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td>9</td><td><font color="green">-1.59e-08</font></td><td><font color="green">4.80e-04</font></td><td><font color="green">0.06</font></td><td>4.31e-03</td></tr>
+			<tr><td>019_Cu_Fe_Lu</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>13</td><td>13</td><td><font color="green">1.67e-05</font></td><td><font color="green">1.35e-03</font></td><td><font color="green">0.18</font></td><td>0.02</td></tr>
+			<tr><td>020_Cu_In_Mg</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td>9</td><td><font color="green">-1.92e-07</font></td><td><font color="green">1.19e-05</font></td><td><font color="green">1.41e-03</font></td><td>1.51e-04</td></tr>
+			<tr><td>021_Cu_Pd</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td>9</td><td><font color="green">-1.55e-07</font></td><td><font color="green">7.20e-07</font></td><td><font color="green">1.64e-05</font></td><td>2.00e-06</td></tr>
+			<tr><td>022_Cu_Sr</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td>11</td><td><font color="green">-5.83e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td></tr>
+			<tr><td>023_Dy_Mg_Pr</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>7</td><td>7</td><td><font color="green">-1.73e-07</font></td><td><font color="green">1.80e-07</font></td><td><font color="green">2.25e-03</font></td><td>1.24e-04</td></tr>
+			<tr><td>024_Er_Mg_Nd</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>8</td><td>8</td><td><font color="green">-1.98e-07</font></td><td><font color="green">2.00e-07</font></td><td><font color="green">2.45e-03</font></td><td>1.38e-04</td></tr>
+			<tr><td>025_Ga_Nb</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>10</td><td>10</td><td><font color="green">-4.97e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td></tr>
+			<tr><td>026_Gd_Mg</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>6</td><td>6</td><td><font color="green">-1.36e-05</font></td><td><font color="green">5.87e-05</font></td><td><font color="green">0.08</font></td><td>4.33e-03</td></tr>
+			<tr><td>027_Ge_Mg</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>7</td><td>7</td><td><font color="green">-1.73e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td></tr>
+			<tr><td>028_Ho_Mg_Sm</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td>9</td><td><font color="green">-1.72e-08</font></td><td><font color="green">3.90e-07</font></td><td><font color="green">4.48e-03</font></td><td>2.55e-04</td></tr>
+			<tr><td>029_Ir_Re</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td>11</td><td><font color="green">-1.41e-03</font></td><td><font color="red">0.03</font></td><td><font color="green">2.56</font></td><td>0.28</td></tr>
+			<tr><td>030_Mg_Pr_Tm</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>8</td><td>8</td><td><font color="green">-4.01e-07</font></td><td><font color="green">5.00e-08</font></td><td><font color="green">5.89e-04</font></td><td>3.30e-05</td></tr>
+			<tr><td>031_Mg_Sm</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>6</td><td>6</td><td><font color="green">1.30e-06</font></td><td><font color="green">1.24e-04</font></td><td><font color="green">0.19</font></td><td>0.01</td></tr>
+			<tr><td>032_Mn_Pb_Rh</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>15</td><td>15</td><td><font color="green">-8.55e-08</font></td><td><font color="green">3.30e-06</font></td><td><font color="green">9.58e-04</font></td><td>9.10e-05</td></tr>
+			<tr><td>033_Mn_Pt_Sn</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td>12</td><td><font color="green">-4.73e-07</font></td><td><font color="green">3.60e-07</font></td><td><font color="green">1.49e-03</font></td><td>1.22e-04</td></tr>
+			<tr><td>034_Mn_Rh_Si</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td>12</td><td><font color="green">3.13e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">8.60e-06</font></td><td>1.00e-06</td></tr>
+			<tr><td>035_Mo_Ti_W</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td>14</td><td><font color="green">-1.59e-07</font></td><td><font color="green">4.50e-07</font></td><td><font color="green">1.54e-03</font></td><td>1.52e-04</td></tr>
+			<tr><td>036_Os_Re</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>13</td><td>14</td><td><font color="green">-4.49e-05</font></td><td><font color="green">8.57e-03</font></td><td><font color="green">6.18</font></td><td>0.67</td></tr>
+			<tr><td>037_Os_Ta</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>17</td><td>17</td><td><font color="green">-1.16e-03</font></td><td><font color="red">0.02</font></td><td><font color="green">3.39</font></td><td>0.35</td></tr>
+			<tr><td>038_Pb_Rh</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td>14</td><td><font color="green">-7.26e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td></tr>
+			<tr><td>039_Pb_Sc</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>13</td><td>13</td><td><font color="green">-4.83e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td></tr>
+			<tr><td>040_Re_Ru</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td>12</td><td><font color="green">-5.79e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td></tr>
+			<tr><td>041_Ru_Zr</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td>9</td><td><font color="green">-3.96e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td></tr>
+			<tr><td>042_Ti_Zn</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>13</td><td>13</td><td><font color="green">-1.51e-04</font></td><td><font color="green">4.58e-04</font></td><td><font color="green">0.43</font></td><td>0.04</td></tr>
+		</tbody>
+	</table>
+
+
+</body>
+</html>
