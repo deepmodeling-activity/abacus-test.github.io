@@ -42,24 +42,29 @@
 </head>
 
 <body>
-        <button class="button" id="button1" onclick="showContent(1)">ConfigurationOpt</button>
-        <button class="button" id="button2" onclick="showContent(2)">SCF</button>
-        <button class="button" id="button3" onclick="showContent(3)">DCU</button>
-        <button class="button" id="button4" onclick="showContent(4)">Symmetry</button>
+        <button class="button" id="button1" onclick="showContent(1)">EOS</button>
+        <button class="button" id="button2" onclick="showContent(2)">RELAX</button>
+        <button class="button" id="button3" onclick="showContent(3)">SCF</button>
+        <button class="button" id="button4" onclick="showContent(4)">DCU</button>
+        <button class="button" id="button5" onclick="showContent(5)">Symmetry</button>
 
         <div id="content1" class="content">
-            <iframe src="relax.html" onload="resizeIframe(this)"></iframe>
+            <iframe src="eos.html" onload="resizeIframe(this)"></iframe>
         </div>
 
         <div id="content2" class="content">
-            <iframe src="scf.html" onload="resizeIframe(this)"></iframe>
+            <iframe src="relax.html" onload="resizeIframe(this)"></iframe>
         </div>
 
         <div id="content3" class="content">
-            <iframe src="dcu.html" onload="resizeIframe(this)"></iframe>
+            <iframe src="scf.html" onload="resizeIframe(this)"></iframe>
         </div>
 
         <div id="content4" class="content">
+            <iframe src="dcu.html" onload="resizeIframe(this)"></iframe>
+        </div>
+
+        <div id="content5" class="content">
             <iframe src="symmetry.html" onload="resizeIframe(this)"></iframe>
         </div>
 
