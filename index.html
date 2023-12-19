@@ -5,6 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABACUS Test Report</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadContent('/results/performance/result.html',1);
+        });
+
+        function loadContent(pageName,bottomID) {
+            if (bottomID == 1) {
+                document.getElementById('content').innerHTML = `
+                <iframe src="results/performance/result.html" onload="resizeIframe(this)"></iframe>
+                <iframe src="results/performance/comment.html" onload="resizeIframe(this)"></iframe>
+                <iframe src="results/performance/all.html" onload="resizeIframe(this)"></iframe>
+                `;
+            } else {
+                document.getElementById('content').innerHTML = `
+                <iframe src="${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
+                `;
+            }
+            updateActiveButton(bottomID);
+        }
+
+        function updateActiveButton(bottomID) {
+            document.querySelectorAll('.button').forEach(button => {
+                button.classList.remove('selected');
+            });
+
+            const activeButton = document.getElementById('button' + bottomID);
+            if (activeButton) {
+                activeButton.classList.add('selected');
+            }
+        }
+
+        function resizeIframe(obj) {
+                obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight + 10) + 'px';
+            }
+
+        
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,8 +82,12 @@
             cursor: pointer;
         }
 
-        .selected {
+        .button.selected {
             background-color: black;
+        }
+
+        .button:hover {
+            background-color: #e0e0e0;
         }
 
         .content {
@@ -57,67 +98,20 @@
 </head>
 
 <body>
-
-
     <div class="window">
         <h1>ABACUS Test Report</h1>
+        <nav>
+            <ul>
+                <button class="button" id="button1" onclick="loadContent('results/performance/index',1); return false; ">Performance Test</a>
+                <button class="button" id="button2" onclick="loadContent('results/bda/bda',2); return false;">Battery</button>
+                <button class="button" id="button3" onclick="loadContent('results/sc/sc',3); return false;">Semi-Conductor</button>
+                <button class="button" id="button4" onclick="loadContent('results/alloy/alloy',4); return false;">Alloy</button>
+                <button class="button" id="button5" onclick="loadContent('results/mathlib/mathlib',5); return false;">MathLib</button>
 
-        <button class="button" id="button1" onclick="showContent(1)">Performance Test</button>
-        <button class="button" id="button2" onclick="showContent(2)">Battery</button>
-        <button class="button" id="button3" onclick="showContent(3)">Semi-Conductor</button>
-        <button class="button" id="button4" onclick="showContent(4)">Alloy</button>
-        <button class="button" id="button5" onclick="showContent(5)">MathLib</button>
-        <!--<button class="button" id="button6" onclick="showContent(6)">Delta Test</button>-->
-
-        <div id="content1" class="content">
-            <iframe src="results/performance/result.html" onload="resizeIframe(this)"></iframe>
-            <iframe src="results/performance/comment.html" onload="resizeIframe(this)"></iframe>
-            <iframe src="results/performance/all.html" onload="resizeIframe(this)"></iframe>
+            </ul>
+        </nav>
+        <div id="content">    
         </div>
-
-        <div id="content2" class="content">
-            <iframe src="results/bda/bda.html" onload="resizeIframe(this)"></iframe>
-        </div>
-
-        <div id="content3" class="content">
-            <iframe src="results/sc/sc.html" onload="resizeIframe(this)"></iframe>
-        </div>
-
-        <div id="content4" class="content">
-            <iframe src="results/alloy/alloy.html" onload="resizeIframe(this)"></iframe>
-        </div>
-
-        <div id="content5" class="content">
-            <iframe src="results/mathlib/mathlib.html" onload="resizeIframe(this)"></iframe>
-        </div>
-<!--
-        <div id="content6" class="content">
-            <iframe src="deltatest/deltatest.html" onload="resizeIframe(this)"></iframe>
-        </div>
--->
-        <script>
-            function showContent(number) {
-                var contents = document.getElementsByClassName("content");
-                var buttons = document.getElementsByClassName("button");
-
-                for (var i = 0; i < contents.length; i++) {
-                    contents[i].style.display = "none";
-                }
-
-                for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].classList.remove("selected");
-                }
-
-                document.getElementById("content" + number).style.display = "block";
-                document.getElementById("button" + number).classList.add("selected");
-            }
-
-            function resizeIframe(obj) {
-                obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight + 10) + 'px';
-            }
-
-        </script>
-
     </div>
 
 </body>

@@ -5,6 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABACUS Test Report</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadContent('eos',1);
+        });
+
+        function loadContent(pageName,bottomID) {
+                document.getElementById('content').innerHTML = `
+                <iframe src="${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
+                `;
+            updateActiveButton(bottomID);
+        }
+
+        function updateActiveButton(bottomID) {
+            document.querySelectorAll('.button').forEach(button => {
+                button.classList.remove('selected');
+            });
+
+            const activeButton = document.getElementById('button' + bottomID);
+            if (activeButton) {
+                activeButton.classList.add('selected');
+            }
+        }
+
+        function resizeIframe(obj) {
+                obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight + 10) + 'px';
+            }
+
+        
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,54 +71,18 @@
 </head>
 
 <body>
-        <button class="button" id="button1" onclick="showContent(1)">EOS</button>
-        <button class="button" id="button2" onclick="showContent(2)">RELAX</button>
-        <button class="button" id="button3" onclick="showContent(3)">SCF</button>
-        <button class="button" id="button4" onclick="showContent(4)">DCU</button>
-        <button class="button" id="button5" onclick="showContent(5)">Symmetry</button>
 
-        <div id="content1" class="content">
-            <iframe src="eos.html" onload="resizeIframe(this)"></iframe>
-        </div>
-
-        <div id="content2" class="content">
-            <iframe src="relax.html" onload="resizeIframe(this)"></iframe>
-        </div>
-
-        <div id="content3" class="content">
-            <iframe src="scf.html" onload="resizeIframe(this)"></iframe>
-        </div>
-
-        <div id="content4" class="content">
-            <iframe src="dcu.html" onload="resizeIframe(this)"></iframe>
-        </div>
-
-        <div id="content5" class="content">
-            <iframe src="symmetry.html" onload="resizeIframe(this)"></iframe>
-        </div>
-
-        <script>
-            function showContent(number) {
-                var contents = document.getElementsByClassName("content");
-                var buttons = document.getElementsByClassName("button");
-
-                for (var i = 0; i < contents.length; i++) {
-                    contents[i].style.display = "none";
-                }
-
-                for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].classList.remove("selected");
-                }
-
-                document.getElementById("content" + number).style.display = "block";
-                document.getElementById("button" + number).classList.add("selected");
-            }
-
-            function resizeIframe(obj) {
-                obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight + 10) + 'px';
-            }
-
-        </script>
+    <nav>
+        <ul>
+            <button class="button" id="button1" onclick="loadContent('eos',1); return false; ">EOS</button>
+        <button class="button" id="button2" onclick="loadContent('relax',2); return false; ">RELAX</button>
+        <button class="button" id="button3" onclick="loadContent('scf',3); return false; ">SCF</button>
+        <button class="button" id="button4" onclick="loadContent('dcu',4); return false; ">DCU</button>
+        <button class="button" id="button5" onclick="loadContent('symmetry',5); return false; ">Symmetry</button>
+        </ul>
+    </nav>
+    <div id="content">    
+    </div>
 </body>
 
 </html>
