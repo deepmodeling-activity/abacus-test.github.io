@@ -15,18 +15,18 @@
 
             if (pageName == "performance") {
                 document.getElementById('content').innerHTML = `
-                <iframe src="/results/performance/result.html" onload="resizeIframe(this)"></iframe>
-                <iframe src="/results/performance/comment.html" onload="resizeIframe(this)"></iframe>
-                <iframe src="/results/performance/all.html" onload="resizeIframe(this)"></iframe>
+                <iframe src="results/performance/result.html" onload="resizeIframe(this)"></iframe>
+                <iframe src="results/performance/comment.html" onload="resizeIframe(this)"></iframe>
+                <iframe src="results/performance/all.html" onload="resizeIframe(this)"></iframe>
                 `;
             }
             else {
                 document.getElementById('content').innerHTML = `
-                <iframe src="/results/${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
+                <iframe src="results/${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
                 `;
             }
             updateActiveButton(pageName);
-            var NewURL = "/index.html" + "?pname=" + pageName;
+            var NewURL = "index.html" + "?pname=" + pageName;
             window.history.pushState({path: NewURL}, '', NewURL);
         }
 
