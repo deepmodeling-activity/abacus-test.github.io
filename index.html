@@ -26,8 +26,11 @@
                 `;
             }
             updateActiveButton(pageName);
+            console.log(pageName);
+            console.log(window.location.href)
             var NewURL = "index.html" + "?pname=" + pageName;
             window.history.pushState({path: NewURL}, '', NewURL);
+            console.log(window.location.href)
         }
 
         function updateAlloyButtom(pageName){
