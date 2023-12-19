@@ -7,39 +7,77 @@
     <title>ABACUS Test Report</title>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            loadContent('/results/performance/result.html',1);
+            myFunction()
         });
 
-        function loadContent(pageName,bottomID) {
-            if (bottomID == 1) {
+        function loadContent(pageName) {
+            pageName = updateAlloyButtom(pageName);
+
+            if (pageName == "performance") {
                 document.getElementById('content').innerHTML = `
-                <iframe src="results/performance/result.html" onload="resizeIframe(this)"></iframe>
-                <iframe src="results/performance/comment.html" onload="resizeIframe(this)"></iframe>
-                <iframe src="results/performance/all.html" onload="resizeIframe(this)"></iframe>
-                `;
-            } else {
-                document.getElementById('content').innerHTML = `
-                <iframe src="${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
+                <iframe src="/results/performance/result.html" onload="resizeIframe(this)"></iframe>
+                <iframe src="/results/performance/comment.html" onload="resizeIframe(this)"></iframe>
+                <iframe src="/results/performance/all.html" onload="resizeIframe(this)"></iframe>
                 `;
             }
-            updateActiveButton(bottomID);
+            else {
+                document.getElementById('content').innerHTML = `
+                <iframe src="/results/${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
+                `;
+            }
+            updateActiveButton(pageName);
+            var NewURL = "/index.html" + "?pname=" + pageName;
+            window.history.pushState({path: NewURL}, '', NewURL);
         }
 
-        function updateActiveButton(bottomID) {
-            document.querySelectorAll('.button').forEach(button => {
+        function updateAlloyButtom(pageName){
+            var buttonNames = ['eos', 'scf', 'dcu', 'relax', 'symmetry'];
+            if (pageName.startsWith("alloy/")) {
+                var display = "block";
+                if (pageName == "alloy/alloy") {
+                    pageName = "alloy/eos";
+                }
+            }
+            else {
+                var display = "none";  
+            }
+            for (var i = 0; i < buttonNames.length; i++) {
+                var button = document.getElementById('button-alloy/' + buttonNames[i]);
+                button.style.display = display;
+            }
+            return pageName;
+        }
+
+        function myFunction() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var pname = urlParams.get('pname');
+            if (pname == null) {
+                pname = "performance";
+            }
+            loadContent(pname) 
+        }
+
+        function updateActiveButton(pageName) {
+            document.querySelectorAll(".button").forEach(button => {
                 button.classList.remove('selected');
             });
 
-            const activeButton = document.getElementById('button' + bottomID);
+            const activeButton = document.getElementById('button-' + pageName);
             if (activeButton) {
                 activeButton.classList.add('selected');
+            }
+
+            if (pageName.startsWith("alloy/")) {
+                const activeButton = document.getElementById('button-alloy/alloy');
+                if (activeButton) {
+                    activeButton.classList.add('selected');
+                }
             }
         }
 
         function resizeIframe(obj) {
                 obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight + 10) + 'px';
-            }
-
+        }
         
     </script>
     <style>
@@ -94,6 +132,14 @@
             display: block;
             margin-top: 2rem;
         }
+
+        .button-sublist {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .button-sublist.selected{
+            background-color: black;
+        }
     </style>
 </head>
 
@@ -102,12 +148,18 @@
         <h1>ABACUS Test Report</h1>
         <nav>
             <ul>
-                <button class="button" id="button1" onclick="loadContent('results/performance/index',1); return false; ">Performance Test</a>
-                <button class="button" id="button2" onclick="loadContent('results/bda/bda',2); return false;">Battery</button>
-                <button class="button" id="button3" onclick="loadContent('results/sc/sc',3); return false;">Semi-Conductor</button>
-                <button class="button" id="button4" onclick="loadContent('results/alloy/alloy',4); return false;">Alloy</button>
-                <button class="button" id="button5" onclick="loadContent('results/mathlib/mathlib',5); return false;">MathLib</button>
-
+                <button class="button" id="button-performance" onclick="loadContent('performance'); return false; ">PerformanceTest</a>
+                <button class="button" id="button-bda/bda" onclick="loadContent('bda/bda'); return false;">Battery</button>
+                <button class="button" id="button-sc/sc" onclick="loadContent('sc/sc'); return false;">Semi-Conductor</button>
+                <button class="button" id="button-alloy/alloy" onclick="loadContent('alloy/alloy'); return false;">Alloy</button>
+                <button class="button" id="button-mathlib/mathlib" onclick="loadContent('mathlib/mathlib'); return false;">MathLib</button>
+            </ul>
+            <ul class="button-sublist">   
+                <button class="button" id="button-alloy/eos" style="display: none;" onclick="loadContent('alloy/eos'); return false;">eos</button>
+                <button class="button" id="button-alloy/scf" style="display: none;" onclick="loadContent('alloy/scf'); return false;">scf</button>
+                <button class="button" id="button-alloy/dcu" style="display: none;" onclick="loadContent('alloy/dcu'); return false;">dcu</button>
+                <button class="button" id="button-alloy/relax" style="display: none;" onclick="loadContent('alloy/relax'); return false;">relax</button>
+                <button class="button" id="button-alloy/symmetry" style="display: none;" onclick="loadContent('alloy/symmetry'); return false;">symmetry</button>
             </ul>
         </nav>
         <div id="content">    
