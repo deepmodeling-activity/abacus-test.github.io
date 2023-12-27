@@ -102,13 +102,14 @@
 		<tr><td><strong>Test_date</strong></td><td>:</td><td>2023-12-26</td></tr>
 		<tr><td><strong>Version</strong></td><td>:</td><td>v3.5.0(5a43bbf (Tue Dec 26 08:57:55 2023 +0000))</td></tr>
 		<tr><td><strong>Job_address</strong></td><td>:</td><td><a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-sc-abacustest-v0.3.74-a96a34">link</a></td></tr>
-		<tr><td><strong>Targets</strong></td><td>:</td><td>ABACUS HSE test on band gap of semiconductor systems</td></tr>
+		<tr><td><strong>Targets</strong></td><td>:</td><td>ABACUS HSE test on band gap of semiconductor</td></tr>
 		<tr><td><strong>Datasets</strong></td><td>:</td><td><a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fdatasets%2Fsemi-conductor">link</a></td></tr>
 		<tr><td><strong>Properties</strong></td><td>:</td><td>band gap</td></tr>
 	</table>
 
 	<div class="head1">1. Introduction</div>
-	<div class="doc">    The bandgap is a key parameter for semiconductor systems, and in this test, we employed the ABACUS package in conjunction with the HSE hybrid functional to calculate the bandgaps of a series of typical semiconductors. Furthermore, we compared the results between abacus and reference HSE and experimental values. The reference values are obtained from the following sources: 10.1021/acs.jpclett.8b00919 and 10.1021/acs.jpclett.0c00481.</div>
+	<div class="doc">    The bandgap is a key parameter for semiconductor systems, and in this test, we employed the ABACUS package in conjunction with the HSE hybrid functional to calculate the bandgaps of a series of typical semiconductors. Furthermore, we compared the results between abacus and reference HSE and experimental values. The reference values (QE/VASP/FHI-AIMS) are obtained from the following sources: 10.1021/acs.jpclett.8b00919 and 10.1021/acs.jpclett.0c00481.</div>
+    <div class="doc">    ABACUS and QE employ the SG15-type norm-conserving PBE pseudopotentials (except for In is PSlibrary norm-conserving), vasp employs the PBE PAW potentials, whereas all-electron calculations are done with fhi-aims. The input files of ABACUS can be downloaded by accessing the link on Datasets at beginning.</div>
 	<div class="head1">2. Results</div>
 
     <img id="myImage" src="all-percent.png" onclick="openFullscreen()">
