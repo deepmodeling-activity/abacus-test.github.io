@@ -1,5 +1,5 @@
-<html>
 
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +7,40 @@
         body {
             text-align: left;
         }
-
-        .title{
+        
+        .head1{
             font-size: 20px;
             font-weight: bold;
             white-space: pre-wrap;
+            line-height: 2;
         }
-
-        .title1{
+        
+        .head2{
             font-size: 18px;
             font-weight: bold;
             white-space: pre-wrap;
+            line-height: 2;
         }
-
-        .tablehead{
+        
+        .head3{
             font-size: 16px;
             font-weight: bold;
             white-space: pre-wrap;
+            line-height: 2;
+        }
+
+        .tabletitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+        
+        .imagetitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
         }
 
         .doc {
@@ -31,50 +48,217 @@
             text-align: left;
             display: inline-block;
             font-size: 16px;
-            width: 75%;
+            width: 100%;
             word-wrap: break-word;
             white-space: pre-wrap;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        #keys table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        #keys td {
+          border: none;
+          padding: 5px;
+          text-align: left;
+          line-height: 0.8;
+        }
+        
+        img {
+            max-width: 600px;
+            height: auto;
+            cursor: zoom-in;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-out;
         }
     </style>
 </head>
 
 <body>
-    <div class="doc">
-Test date: 2023-09-27. 
-Version  : v3.3.4(4a6d764 (Tue Sep 26 14:08:49 2023 +0000))
+	<table id="keys">
+		<tr><td><strong>Test_date</strong></td><td>:</td><td>2023-12-27</td></tr>
+		<tr><td><strong>Version</strong></td><td>:</td><td></td></tr>
+		<tr><td><strong>Job_address</strong></td><td>:</td><td><a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-bda-abacustest-v0.3.74-21d97d">link</a></td></tr>
+		<tr><td><strong>Targets</strong></td><td>:</td><td>ABACUS +U</td></tr>
+		<tr><td><strong>Datasets</strong></td><td>:</td><td><a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fdatasets%2Fbda">link</a></td></tr>
+		<tr><td><strong>Properties</strong></td><td>:</td><td>magmom/voltage</td></tr>
+	</table>
+
+	<div class="head1">1. Introduction</div>
+	<div class="doc">    Simulation of battery materials is of great significance. In this test, ab-initio calculations were carried out on a series of typical battery systems (combination of Li/Na and Fe/Co/Ni/Mn/CrO2) by using ABACUS combined with the +U. Self-consistent field (SCF) calculations were performed, and the voltages were also calculated and compared with the results obtained by using VASP.</div>
+	<div class="head1">2. Results</div>
+	<div class="head2">2.1 Voltage</div>
+
+    <img id="myImage" src="voltage.png" onclick="openFullscreen()">
+    <div class="overlay" id="overlay" onclick="closeFullscreen()">
+        <img id="fullscreenImage" src="voltage.png">
     </div>
+    <div class="imagetitle">Figure 1. The voltage (eV) calculated by ABACUS and VASP.</div>
+	<div class="tabletitle">Table 1. The voltage (eV) calculated by ABACUS and VASP. RE means the relative error of the voltage calculated by ABACUS compared with that by VASP.</div>
+	<div class="head2">Pass/Total: <font color="red">14/26 (53.85%)</font></div>
 
-    <div class="title">1. Introduction</div>
+    <table border="2px">
+        <tbody>
+            <tr>
+                <td>Key</td>
+                <td>Pass/Total</td>
+                <td>Criteria</td>
+            </tr>
+        <tr>
+                <td>Converge</td>
+                <td style="color:red">24/26</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>RE(%)</td>
+                <td style="color:red">14/24</td> 
+                <td>abs(x)<10</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <div class="doc">
-        Simulation of battery materials is of great significance. In this test, ab-initio calculations were carried out on a series of typical battery systems (combination of Li/Na and Fe/Co/Ni/Mn/CrO2) using ABACUS combined with the +U. Self-consistent field (SCF) calculations were performed, and the voltages were also calculated and compared with the results obtained using Vienna Ab initio Simulation Package (VASP).
 
-        Click <a href="https://github.com/deepmodeling-activity/abacus-test.github.io/tree/master/datasets/battery" target="detail">here</a> to check the ABACUS inputs.
-        Click <a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fsched-abacustest-bda-test-f0160f" target="detail">here</a> to check more details of the calculations.
-    </div>
+	<table border="2px">
+		<thead><tr><th>example</th><th>Converge</th><th>Voltage(ABACUS,eV)</th><th>Voltage(VASP,eV)</th><th>&Delta;V(ABACUS-VASP,eV)</th><th>RE(%)</th></tr></thead>
+		<tbody>			<tr><td>NaCoO2-0.5-1.0</td><td><font color="green">True</font></td><td>3.93</td><td>3.55</td><td>0.38</td><td><font color="red">10.68</font></td></tr>
+			<tr><td>NaCoO2-0-0.5</td><td><font color="green">True</font></td><td>2.57</td><td>2.44</td><td>0.13</td><td><font color="green">5.39</font></td></tr>
+			<tr><td>LiCoO2-0.5-1.0</td><td><font color="green">True</font></td><td>4.31</td><td>4.02</td><td>0.28</td><td><font color="green">7.08</font></td></tr>
+			<tr><td>LiCoO2-0-0.5</td><td><font color="green">True</font></td><td>3.86</td><td>3.64</td><td>0.22</td><td><font color="green">6.02</font></td></tr>
+			<tr><td>NaCrO2-0.5-1.0</td><td><font color="green">True</font></td><td>4.21</td><td>3.71</td><td>0.50</td><td><font color="red">13.62</font></td></tr>
+			<tr><td>NaCrO2-0-0.5</td><td><font color="green">True</font></td><td>3.26</td><td>2.97</td><td>0.29</td><td><font color="green">9.74</font></td></tr>
+			<tr><td>LiCrO2-0.5-1.0</td><td><font color="red">False</font></td><td>---</td><td>4.25</td><td>---</td><td><font color="red">---</font></td></tr>
+			<tr><td>LiCrO2-0-0.5</td><td><font color="red">False</font></td><td>---</td><td>3.82</td><td>---</td><td><font color="red">---</font></td></tr>
+			<tr><td>NaFeO2-0.5-1.0</td><td><font color="green">True</font></td><td>4.17</td><td>3.67</td><td>0.50</td><td><font color="red">13.66</font></td></tr>
+			<tr><td>NaFeO2-0-0.5</td><td><font color="green">True</font></td><td>3.15</td><td>3.16</td><td>-0.02</td><td><font color="green">-0.54</font></td></tr>
+			<tr><td>NaFeO2-0.5-1.0-JT</td><td><font color="green">True</font></td><td>4.17</td><td>---</td><td>0</td><td><font color="green">0</font></td></tr>
+			<tr><td>LiFeO2-0.5-1.0</td><td><font color="green">True</font></td><td>4.45</td><td>4.21</td><td>0.24</td><td><font color="green">5.73</font></td></tr>
+			<tr><td>LiFeO2-0-0.5</td><td><font color="green">True</font></td><td>4.13</td><td>3.99</td><td>0.14</td><td><font color="green">3.54</font></td></tr>
+			<tr><td>LiFeO2-0.5-1.0-JT</td><td><font color="green">True</font></td><td>4.45</td><td>---</td><td>0</td><td><font color="green">0</font></td></tr>
+			<tr><td>NaMnO2-0.5-1.0</td><td><font color="green">True</font></td><td>3.48</td><td>2.74</td><td>0.74</td><td><font color="red">26.97</font></td></tr>
+			<tr><td>NaMnO2-0-0.5</td><td><font color="green">True</font></td><td>2.60</td><td>2.34</td><td>0.26</td><td><font color="red">11.09</font></td></tr>
+			<tr><td>NaMnO2-0-0.5-JT</td><td><font color="green">True</font></td><td>2.60</td><td>---</td><td>0</td><td><font color="green">0</font></td></tr>
+			<tr><td>LiMnO2-0.5-1.0</td><td><font color="green">True</font></td><td>3.72</td><td>3.26</td><td>0.45</td><td><font color="red">13.91</font></td></tr>
+			<tr><td>LiMnO2-0-0.5</td><td><font color="green">True</font></td><td>3.53</td><td>3.20</td><td>0.33</td><td><font color="red">10.33</font></td></tr>
+			<tr><td>LiMnO2-0-0.5-JT</td><td><font color="green">True</font></td><td>3.52</td><td>---</td><td>0</td><td><font color="green">0</font></td></tr>
+			<tr><td>NaNiO2-0.5-1.0</td><td><font color="green">True</font></td><td>4.08</td><td>3.38</td><td>0.70</td><td><font color="red">20.57</font></td></tr>
+			<tr><td>NaNiO2-0-0.5</td><td><font color="green">True</font></td><td>2.98</td><td>2.72</td><td>0.25</td><td><font color="green">9.26</font></td></tr>
+			<tr><td>NaNiO2-0-0.5-JT</td><td><font color="green">True</font></td><td>2.97</td><td>---</td><td>0</td><td><font color="green">0</font></td></tr>
+			<tr><td>LiNiO2-0.5-1.0</td><td><font color="green">True</font></td><td>4.49</td><td>4.05</td><td>0.43</td><td><font color="red">10.69</font></td></tr>
+			<tr><td>LiNiO2-0-0.5</td><td><font color="green">True</font></td><td>4.10</td><td>3.53</td><td>0.57</td><td><font color="red">16.23</font></td></tr>
+			<tr><td>LiNiO2-0-0.5-JT</td><td><font color="green">True</font></td><td>3.96</td><td>---</td><td>0</td><td><font color="green">0</font></td></tr>
+		</tbody>
+	</table>
 
-    <div class="title">2. Results
-    </div>
-    <div class="title1">2.1 Statistical metrics</div>
+	<div class="head2">2.2 Other details</div>
+	<div class="doc">    Below table shows the results of each example. MagMeetCriteria is True only if the magnetic moment of Metal meet rules: If Li/Na is fully delithiated or non-delithiated, then there is only one type of metal magnetic moment; if it is half-delithiated, there are two types, and the number of atoms in each type is equal. The classification standard is that the difference in magnetic moment is less than 0.2 &mu;B.</div>
+	<div class="tabletitle">Table 2. The results of each example.</div>
+	<div class="head2">Pass/Total: <font color="red">20/32 (62.50%)</font></div>
 
-    <div class="doc">
-        This test evaluates the calculation normal termination ratio, SCF convergence ratio, maximum number of steps used for SCF convergence, as well as the maximum deviation ratio and correlation coefficient between the voltage calculated by ABACUS and the VASP reference results, and the accuracy of computed atomic magnetic moments.
-        <iframe src="supermetrics_summary.html" onload="resizeIframe(this)" width="100%" frameborder="0"></iframe></div>
-    <div class="title1">2.1 Voltage</div>
+    <table border="2px">
+        <tbody>
+            <tr>
+                <td>Key</td>
+                <td>Pass/Total</td>
+                <td>Criteria</td>
+            </tr>
+        <tr>
+                <td>NormalEnd</td>
+                <td style="color:green">32/32</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>Converge</td>
+                <td style="color:red">31/32</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>SCFSteps</td>
+                <td style="color:red">31/32</td> 
+                <td>x<200</td>
+            </tr>
+        <tr>
+                <td>MagMeetCriteria</td>
+                <td style="color:red">20/31</td> 
+                <td>bool(x)</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <div class="doc">
-        The voltage calculated by ABACUS and VASP.
-        
-        <img src="vs.png" alt="ABACUS Delta Test" class="responsive-image" width="600" height="400">
-    </div>
-    
-    
+
+	<table border="2px">
+		<thead><tr><th>example</th><th>NormalEnd</th><th>Converge</th><th>SCFSteps</th><th>MagMeetCriteria</th></tr></thead>
+		<tbody>			<tr><td>003_NaFeO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">21</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>002_CrO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">56</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>001_CoO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">36</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>001_NaCoO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">24</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>005_Li0.5NiO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">100</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>004_LiMnO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">19</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>004_LiMnO2-JT</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">19</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>002_LiCrO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">18</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>004_NaMnO2-JT</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">19</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>001_LiCoO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">22</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>004_Na0.5MnO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">22</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>004_MnO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">20</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>005_NiO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">38</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>003_FeO2-JT</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">21</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>002_NaCrO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">18</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>004_Li0.5MnO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">23</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>005_NaNiO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">59</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>000_bcc-Li</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">10</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>003_Na0.5FeO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">29</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>002_Na0.5CrO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">95</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>001_Na0.5CoO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">114</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>005_NaNiO2-JT</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">61</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>003_FeO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">22</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>002_Li0.5CrO2</td><td><font color="green">True</font></td><td><font color="red">False</font></td><td><font color="red">200</font></td><td><font color="red">---</font></td></tr>
+			<tr><td>003_LiFeO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">21</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>001_Li0.5CoO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">97</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>005_Na0.5NiO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">109</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>000_bcc-Na</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">10</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>005_LiNiO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">28</font></td><td><font color="green">True</font></td></tr>
+			<tr><td>003_Li0.5FeO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">27</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>004_NaMnO2</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">19</font></td><td><font color="red">False</font></td></tr>
+			<tr><td>005_LiNiO2-JT</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td><font color="green">41</font></td><td><font color="green">True</font></td></tr>
+		</tbody>
+	</table>
+
+
     <script>
-        function resizeIframe(obj) {
-            obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight) + 'px';
+    
+        function openFullscreen() {
+            let overlay = document.getElementById("overlay");
+            overlay.style.display = "block";
         }
+
+        function closeFullscreen() {
+            let overlay = document.getElementById("overlay");
+            overlay.style.display = "none";
+        }
+        
     </script>
-
+    
 </body>
-
 </html>
