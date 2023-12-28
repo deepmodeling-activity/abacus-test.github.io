@@ -1,41 +1,114 @@
 <html>
-
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        table {
-            width: 85%;
-            text-align: center;
+        body {
+            text-align: left;
+        }
+        
+        .head1{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+        
+        .head2{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+        
+        .head3{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
         }
 
-        .note {
-            width: 75%;
+        .tabletitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+        
+        .imagetitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+
+        .doc {
+            font-family: Verdana, sans-serif;
             text-align: left;
             display: inline-block;
+            font-size: 16px;
+            width: 100%;
             word-wrap: break-word;
             white-space: pre-wrap;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        #keys table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        #keys td {
+          border: none;
+          padding: 5px;
+          text-align: left;
+          line-height: 0.8;
+        }
+        
+        img {
+            max-width: 600px;
+            height: auto;
+            cursor: zoom-in;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-out;
         }
     </style>
 </head>
 
 <body>
-    <div class="doc">
-    <br>
-    Test date: 2023-09-27. 
-    <br>
-    Version  : v3.3.4(4a6d764 (Tue Sep 26 14:08:49 2023 +0000))
-    <br>
-    <br>
-    The precision tests of the mathematical library mainly focus on the accuracy, convergence, and stability of the ABACUS mathematical function calculations, as well as the consistency of the results across different computing platforms. Currently, we have provided precision error analysis charts for the Sphere Bessel Function of the First Kind and Simpson Integral, which are involved in the two-center integral calculations.
-    <br>
-    <br>
-    <br>
-    </doc>
-</body>
-
-<body>
-    <center><h3>Table 1. Error Analysis of Sphere Bessel Function of the First Kind</h3></center>
-    <center>
+    <table id="keys">
+		<tr><td><strong>Test_date</strong></td><td>:</td><td>2023-12-28</td></tr>
+		<tr><td><strong>Version</strong></td><td>:</td><td>v3.5.0(5a43bbf (Tue Dec 26 08:57:55 2023 +0000))</td></tr>
+		<tr><td><strong>Targets</strong></td><td>:</td><td>mathematical library accuracy</td></tr>
+		<tr><td><strong>Properties</strong></td><td>:</td><td>Sphere Bessel Function/Simpson Integral</td></tr>
+	</table>
+    <div class="head1">1. Introduction</div>
+    <div class="doc">    The precision tests of the mathematical library mainly focus on the accuracy, convergence, and stability of the ABACUS mathematical function calculations, as well as the consistency of the results across different computing platforms. Currently, we have provided precision error analysis charts for the Sphere Bessel Function of the First Kind and Simpson Integral, which are involved in the two-center integral calculations.</div>
+    <div class="head1">2. Results</div>
+    
+    <center><div class="tabletitle">Table 1. Error Analysis of Sphere Bessel Function of the First Kind</div></center>
+    
     <table border="2px">
         <thead><tr><th title="Field #1">Order</th>
         <th title="Field #2">l = 0</th>
@@ -57,7 +130,7 @@
         <td> Max: 3.78e-14 (Mean: 4.87e-16) </td>
         <td> Max: 5.33e-11 (Mean: 3.10e-14) </td>
         <td> Max: 2.22e-07 (Mean: 5.49e-11) </td>
-        <td> Max: 1.39e-02 (Mean: 3.01e-06) </td>
+        <td> Max: <font color="red">1.39e-02</font> (Mean: <font color="red">3.01e-06</font>)</td>
         <td> Max: 4.99e-09 (Mean: 3.55e-11) </td>
         <td> Max: 4.96e-09 (Mean: 5.77e-11) </td>
         <td> Max: 5.33e-10 (Mean: 7.87e-11) </td>
@@ -72,7 +145,7 @@
         <td> Max: 3.78e-14 (Mean: 4.87e-16) </td>
         <td> Max: 5.33e-11 (Mean: 3.10e-14) </td>
         <td> Max: 2.22e-07 (Mean: 5.49e-11) </td>
-        <td> Max: 1.39e-02 (Mean: 3.01e-06) </td>
+        <td> Max: <font color="red">1.39e-02</font> (Mean: <font color="red">3.01e-06</font>)</td>
         <td> Max: 4.99e-09 (Mean: 3.55e-11) </td>
         <td> Max: 4.96e-09 (Mean: 5.77e-11) </td>
         <td> Max: 5.33e-10 (Mean: 7.87e-11) </td>
@@ -112,30 +185,40 @@
         <td> Max: 4.88e-19 (Mean: 2.52e-20) </td>
         </tr>
         </tbody></table>
-        </center>
-        </br>
-        </br>
-        <div class="note">Note:
-            - The reference results are calculated by Octave.
-            - Sphere Bessel Function of the First Kind are performed on 5,000 grid points in the interval of (0,5).
-            - Old-Besselj is referred to <i>ModuleBase::Sphbes::Spherical_Bessel</i> in ABACUS.
-            - New-Besselj is referred to <i>ModuleBase::Sphbes::sphbesj</i> in ABACUS.
-            - Tests are performed on GNU and Intel compilers in ABACUS docker environment.</note>
+ 
+    <div class="doc">Note:
+    - The reference results are calculated by Octave.
+    - Sphere Bessel Function of the First Kind are performed on 5,000 grid points in the interval of (0,5).
+    - Old-Besselj is referred to <i>ModuleBase::Sphbes::Spherical_Bessel</i> in ABACUS.
+    - New-Besselj is referred to <i>ModuleBase::Sphbes::sphbesj</i> in ABACUS.
+    - Tests are performed on GNU and Intel compilers in ABACUS docker environment.
+    </div>
 
-
-</br>
-</br>
-
-    <center><h3>Figure 1. Error Analysis of Simpson Integral</h3></center>
     <div style="display: flex; justify-content: center;">
         <img src="figs/inv-simpson.jpg" style="width: 30%; margin-right: 10px;">
         <img src="figs/exp-simpson.jpg" style="width: 30%; margin-left: 10px;">
-      </div>
-    </br>
-    <div class="note">Note:
-        - Error analysis of Simpson Integral are performed on f(x) = 1 / (1 + x*x )and f(x) = exp(x).
-        - Both uniform and non-uniform grids are tested.
-        - Tests are performed on GNU and Intel compilers in ABACUS docker environment.</note>
+    </div>
+    <center><div class="imagetitle">Figure 1. Error Analysis of Simpson Integral</div></center>
+    
+    <div class="doc">Note:
+    - Error analysis of Simpson Integral are performed on f(x) = 1 / (1 + x*x )and f(x) = exp(x).
+    - Both uniform and non-uniform grids are tested.
+    - Tests are performed on GNU and Intel compilers in ABACUS docker environment.
+    </div>
+    
+    <script>
+
+        function openFullscreen() {
+            let overlay = document.getElementById("overlay");
+            overlay.style.display = "block";
+        }
+
+        function closeFullscreen() {
+            let overlay = document.getElementById("overlay");
+            overlay.style.display = "none";
+        }
+        
+    </script>
 </body>
 
 </html>
