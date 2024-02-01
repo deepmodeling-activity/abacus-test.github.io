@@ -1,0 +1,316 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: left;
+        }
+        
+        .head1{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2; 
+            margin-top: 1rem;   
+        }
+        
+        .head2{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+        
+        .head3{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+
+        .tabletitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+        
+        .imagetitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+
+        .doc {
+            font-family: Verdana, sans-serif;
+            text-align: left;
+            display: inline-block;
+            font-size: 16px;
+            width: 100%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        #keys table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        #keys td {
+          border: none;
+          padding: 5px;
+          text-align: left;
+          line-height: 0.8;
+        }
+        
+        img {
+            max-width: 600px;
+            max-height: 600px;
+            height: auto;
+            cursor: zoom-in;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-out;
+        }
+    </style>
+</head>
+
+<body>
+	<table id="keys">
+		<tr><td><strong>Test_date</strong></td><td>:</td><td>2024-02-01</td></tr>
+		<tr><td><strong>Version</strong></td><td>:</td><td>v3.5.1(8c9ea51 (Mon Jan 15 15:55:19 2024 +0800))</td></tr>
+		<tr><td><strong>Job_address</strong></td><td>:</td><td></td></tr>
+		<tr><td><strong>Targets</strong></td><td>:</td><td>ABACUS DCU device with CG method</td></tr>
+		<tr><td><strong>Properties</strong></td><td>:</td><td>energy/force/stress/virial/time</td></tr>
+	</table>
+
+	<div class="head1">1. Introduction</div>
+
+	<div class="doc">    Label cpu-cg/cpu-dav/dcu-cg/dcu-dav is the ABACUS job calculated on CPU or DCU with ks_solver cg or dav. The CPU calculation is performed on Bohrium platform with c32_m128_cpu node, and DCU calculation is performed on Sugon platform with kshdnormal node (4DCU+32CPU). Same calculations on CPU with 'dav' method is also calculated by QE v7.0. For all calculations, symmetry is set to 0, ecutwfc is set to 100 Ry, ecutwfc is set to 1e-8, and kspacing is set to 0.08 1/Bohr (in QE, the K point numbers are same with that converting from kspacing). All calculations use pseudopotentials SG15_ONCV_v1.0_upf, and extra calculation with pd04 pseudopotential is used for the AlMg system, which has less valence electron number.</div>
+
+	<div class="head1">2. Result</div>
+
+	<center>
+	<div class="tabletitle">Table 1. The comparsion of energy(E)/force(F)/stress(S)/virial(V) between ABACUS-dcu-dav and QE-cpu-dav.</div>
+	<div class="head2">Pass/Total: <font color="red">23/24 (95.83%)</font></div>
+
+    <table border="2px">
+        <tbody>
+            <tr>
+                <td>Key</td>
+                <td>Pass/Total</td>
+                <td>Criteria</td>
+            </tr>
+        <tr>
+                <td>NormalEnd</td>
+                <td style="color:green">24/24</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>Converge</td>
+                <td style="color:red">23/24</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>&Delta;E/atom(meV)</td>
+                <td style="color:green">24/24</td> 
+                <td>x < 1</td>
+            </tr>
+        <tr>
+                <td>Max&Delta;F(eV/A)</td>
+                <td style="color:green">24/24</td> 
+                <td>x < 0.01</td>
+            </tr>
+        <tr>
+                <td>Max&Delta;V/atom(meV)</td>
+                <td style="color:green">24/24</td> 
+                <td>x < 10</td>
+            </tr>
+        </tbody>
+    </table>
+
+	<table border="2px">
+		<thead><tr><th>example</th><th>NormalEnd</th><th>Converge</th><th>SCFSteps</th><th>&Delta;E/atom(meV)</th><th>Max&Delta;F(eV/A)</th><th>Max&Delta;V/atom(meV)</th><th>Max&Delta;S(kbar)</th></tr></thead>
+		<tbody>			<tr><td>AlMg_12</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td><font color="green">7.95e-03</font></td><td><font color="green">7.21e-03</font></td><td><font color="green">0.11</font></td><td>9.73e-03</td></tr>
+			<tr><td>AlMg_16</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">8.39e-03</font></td><td><font color="green">4.96e-03</font></td><td><font color="green">0.38</font></td><td>0.03</td></tr>
+			<tr><td>AlMg_20</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">7.95e-03</font></td><td><font color="green">4.94e-03</font></td><td><font color="green">1.00</font></td><td>0.09</td></tr>
+			<tr><td>AlMg_24</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td><font color="green">9.99e-03</font></td><td><font color="green">5.98e-04</font></td><td><font color="green">0.55</font></td><td>0.05</td></tr>
+			<tr><td>AlMg_32</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td><font color="green">8.39e-03</font></td><td><font color="green">4.28e-03</font></td><td><font color="green">0.24</font></td><td>0.02</td></tr>
+			<tr><td>AlMg_40</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td><font color="green">7.94e-03</font></td><td><font color="green">1.58e-03</font></td><td><font color="green">0.03</font></td><td>2.48e-03</td></tr>
+			<tr><td>AlMg_48</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td><font color="green">0.01</font></td><td><font color="green">2.82e-03</font></td><td><font color="green">0.11</font></td><td>0.01</td></tr>
+			<tr><td>AlMg_8</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td><font color="green">9.48e-03</font></td><td><font color="green">1.74e-03</font></td><td><font color="green">3.52</font></td><td>0.32</td></tr>
+			<tr><td>AlMg_pd04_12</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>15</td><td><font color="green">1.76e-04</font></td><td><font color="green">1.85e-04</font></td><td><font color="green">0.21</font></td><td>0.02</td></tr>
+			<tr><td>AlMg_pd04_16</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>10</td><td><font color="green">2.24e-04</font></td><td><font color="green">1.86e-04</font></td><td><font color="green">0.08</font></td><td>7.45e-03</td></tr>
+			<tr><td>AlMg_pd04_20</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td><font color="green">-1.37e-03</font></td><td><font color="green">9.30e-05</font></td><td><font color="green">0.12</font></td><td>9.74e-03</td></tr>
+			<tr><td>AlMg_pd04_24</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">2.42e-04</font></td><td><font color="green">7.56e-05</font></td><td><font color="green">0.01</font></td><td>1.16e-03</td></tr>
+			<tr><td>AlMg_pd04_32</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">2.18e-04</font></td><td><font color="green">6.51e-04</font></td><td><font color="green">0.03</font></td><td>3.34e-03</td></tr>
+			<tr><td>AlMg_pd04_40</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td><font color="green">1.81e-04</font></td><td><font color="green">2.85e-04</font></td><td><font color="green">0.34</font></td><td>0.03</td></tr>
+			<tr><td>AlMg_pd04_48</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>16</td><td><font color="green">2.39e-04</font></td><td><font color="green">4.18e-04</font></td><td><font color="green">0.02</font></td><td>1.09e-03</td></tr>
+			<tr><td>AlMg_pd04_8</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>8</td><td><font color="green">2.26e-04</font></td><td><font color="green">2.60e-04</font></td><td><font color="green">0.07</font></td><td>6.40e-03</td></tr>
+			<tr><td>LiLaH_12</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>17</td><td><font color="green">5.51e-04</font></td><td><font color="green">8.67e-04</font></td><td><font color="green">0.18</font></td><td>0.03</td></tr>
+			<tr><td>LiLaH_16</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td><font color="green">3.61e-04</font></td><td><font color="green">3.48e-04</font></td><td><font color="green">0.16</font></td><td>0.04</td></tr>
+			<tr><td>LiLaH_20</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>18</td><td><font color="green">3.49e-04</font></td><td><font color="green">6.62e-04</font></td><td><font color="green">0.08</font></td><td>0.02</td></tr>
+			<tr><td>LiLaH_24</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>13</td><td><font color="green">4.92e-04</font></td><td><font color="green">1.04e-03</font></td><td><font color="green">0.05</font></td><td>0.01</td></tr>
+			<tr><td>LiLaH_32</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>16</td><td><font color="green">4.13e-04</font></td><td><font color="green">4.08e-03</font></td><td><font color="green">0.13</font></td><td>0.03</td></tr>
+			<tr><td>LiLaH_40</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>16</td><td><font color="green">3.45e-04</font></td><td><font color="green">5.33e-04</font></td><td><font color="green">0.02</font></td><td>4.03e-03</td></tr>
+			<tr><td>LiLaH_48</td><td><font color="green">True</font></td><td><font color="red">False</font></td><td>200</td><td><font color="green">-0.40</font></td><td><font color="green">7.20e-03</font></td><td><font color="green">1.04</font></td><td>0.18</td></tr>
+			<tr><td>LiLaH_8</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">-4.13e-04</font></td><td><font color="green">8.11e-04</font></td><td><font color="green">0.24</font></td><td>0.03</td></tr>
+		</tbody>
+	</table>
+	</center>
+
+	<center>
+	<div class="tabletitle">Table 2. The comparsion of energy(E)/force(F)/stress(S)/virial(V) between ABACUS-cpu-dav and QE-cpu-dav.</div>
+	<div class="head2">Pass/Total: <font color="red">23/24 (95.83%)</font></div>
+
+    <table border="2px">
+        <tbody>
+            <tr>
+                <td>Key</td>
+                <td>Pass/Total</td>
+                <td>Criteria</td>
+            </tr>
+        <tr>
+                <td>NormalEnd</td>
+                <td style="color:green">24/24</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>Converge</td>
+                <td style="color:red">23/24</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>&Delta;E/atom(meV)</td>
+                <td style="color:green">24/24</td> 
+                <td>x < 1</td>
+            </tr>
+        <tr>
+                <td>Max&Delta;F(eV/A)</td>
+                <td style="color:red">23/24</td> 
+                <td>x < 0.01</td>
+            </tr>
+        <tr>
+                <td>Max&Delta;V/atom(meV)</td>
+                <td style="color:green">24/24</td> 
+                <td>x < 10</td>
+            </tr>
+        </tbody>
+    </table>
+
+	<table border="2px">
+		<thead><tr><th>example</th><th>NormalEnd</th><th>Converge</th><th>SCFSteps</th><th>&Delta;E/atom(meV)</th><th>Max&Delta;F(eV/A)</th><th>Max&Delta;V/atom(meV)</th><th>Max&Delta;S(kbar)</th></tr></thead>
+		<tbody>			<tr><td>AlMg_12</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td><font color="green">7.95e-03</font></td><td><font color="green">1.17e-03</font></td><td><font color="green">0.12</font></td><td>0.01</td></tr>
+			<tr><td>AlMg_16</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>10</td><td><font color="green">8.38e-03</font></td><td><font color="green">8.82e-04</font></td><td><font color="green">0.02</font></td><td>1.90e-03</td></tr>
+			<tr><td>AlMg_20</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>10</td><td><font color="green">7.94e-03</font></td><td><font color="green">1.78e-03</font></td><td><font color="green">0.08</font></td><td>5.45e-03</td></tr>
+			<tr><td>AlMg_24</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td><font color="green">9.99e-03</font></td><td><font color="green">3.87e-03</font></td><td><font color="green">0.03</font></td><td>3.22e-03</td></tr>
+			<tr><td>AlMg_32</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">8.38e-03</font></td><td><font color="green">1.20e-03</font></td><td><font color="green">0.02</font></td><td>2.33e-03</td></tr>
+			<tr><td>AlMg_40</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>10</td><td><font color="green">7.94e-03</font></td><td><font color="green">2.91e-03</font></td><td><font color="green">0.07</font></td><td>5.33e-03</td></tr>
+			<tr><td>AlMg_48</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td><font color="green">0.01</font></td><td><font color="green">1.54e-03</font></td><td><font color="green">0.01</font></td><td>1.81e-03</td></tr>
+			<tr><td>AlMg_8</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>8</td><td><font color="green">9.47e-03</font></td><td><font color="green">1.09e-03</font></td><td><font color="green">0.19</font></td><td>0.02</td></tr>
+			<tr><td>AlMg_pd04_12</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>9</td><td><font color="green">1.77e-04</font></td><td><font color="green">6.70e-04</font></td><td><font color="green">0.18</font></td><td>0.02</td></tr>
+			<tr><td>AlMg_pd04_16</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">2.24e-04</font></td><td><font color="green">5.48e-04</font></td><td><font color="green">0.04</font></td><td>3.67e-03</td></tr>
+			<tr><td>AlMg_pd04_20</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>10</td><td><font color="green">-1.37e-03</font></td><td><font color="green">1.04e-03</font></td><td><font color="green">0.12</font></td><td>9.56e-03</td></tr>
+			<tr><td>AlMg_pd04_24</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">2.42e-04</font></td><td><font color="green">4.71e-04</font></td><td><font color="green">0.01</font></td><td>5.56e-04</td></tr>
+			<tr><td>AlMg_pd04_32</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td><font color="green">2.15e-04</font></td><td><font color="green">1.29e-04</font></td><td><font color="green">0.02</font></td><td>6.87e-04</td></tr>
+			<tr><td>AlMg_pd04_40</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>13</td><td><font color="green">1.80e-04</font></td><td><font color="green">4.66e-04</font></td><td><font color="green">0.13</font></td><td>0.01</td></tr>
+			<tr><td>AlMg_pd04_48</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td><font color="green">2.35e-04</font></td><td><font color="green">4.71e-04</font></td><td><font color="green">0.01</font></td><td>5.58e-04</td></tr>
+			<tr><td>AlMg_pd04_8</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>7</td><td><font color="green">2.06e-04</font></td><td><font color="green">1.72e-04</font></td><td><font color="green">0.06</font></td><td>5.94e-03</td></tr>
+			<tr><td>LiLaH_12</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>16</td><td><font color="green">5.50e-04</font></td><td><font color="green">3.19e-03</font></td><td><font color="green">0.14</font></td><td>0.02</td></tr>
+			<tr><td>LiLaH_16</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">3.60e-04</font></td><td><font color="green">1.76e-04</font></td><td><font color="green">0.16</font></td><td>0.03</td></tr>
+			<tr><td>LiLaH_20</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td><font color="green">3.53e-04</font></td><td><font color="green">6.41e-03</font></td><td><font color="green">0.16</font></td><td>0.03</td></tr>
+			<tr><td>LiLaH_24</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>12</td><td><font color="green">4.79e-04</font></td><td><font color="green">2.14e-03</font></td><td><font color="green">0.02</font></td><td>5.03e-03</td></tr>
+			<tr><td>LiLaH_32</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>15</td><td><font color="green">4.12e-04</font></td><td><font color="green">3.61e-03</font></td><td><font color="green">0.03</font></td><td>6.36e-03</td></tr>
+			<tr><td>LiLaH_40</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>14</td><td><font color="green">3.64e-04</font></td><td><font color="green">1.66e-03</font></td><td><font color="green">0.01</font></td><td>2.56e-03</td></tr>
+			<tr><td>LiLaH_48</td><td><font color="green">True</font></td><td><font color="red">False</font></td><td>200</td><td><font color="green">-0.40</font></td><td><font color="red">0.01</font></td><td><font color="green">1.66</font></td><td>0.29</td></tr>
+			<tr><td>LiLaH_8</td><td><font color="green">True</font></td><td><font color="green">True</font></td><td>11</td><td><font color="green">8.02e-04</font></td><td><font color="green">1.83e-04</font></td><td><font color="green">0.11</font></td><td>0.02</td></tr>
+		</tbody>
+	</table>
+	</center>
+
+	<center>
+	<div class="tabletitle">Table 2. The atom number (natom), band number (nband, ABACUS/QE), electron number (nelec), SCF steps (SS), and total time (TT) calculated by different ABACUS methods and by QE. For some cases that are not conveged, drho of the last step is shown in the bracket. (The scf_thr is set to 1e-8 and scf_nmax is set to 200)</div>
+	<table border="2px">
+		<thead><tr><th>example</th><th>natom</th><th>nband</th><th>nelec</th><th>SS(dcu-cg)</th><th>SS(qe-dav)</th><th>SS(dcu-dav)</th><th>SS(cpu-cg)</th><th>SS(cpu-dav)</th><th>TT(s,dcu-cg)</th><th>TT(s,qe-dav)</th><th>TT(s,dcu-dav)</th><th>TT(s,cpu-cg)</th><th>TT(s,cpu-dav)</th></tr></thead>
+		<tbody>			<tr><td>AlMg_12</td><td>12</td><td>76/76</td><td>125.00</td><td>9</td><td>11</td><td>9</td><td>9</td><td>9</td><td>378.08</td><td>406.70</td><td>477.06</td><td>751.72</td><td>870.33</td></tr>
+			<tr><td>AlMg_16</td><td>16</td><td>103/102</td><td>170.00</td><td>11</td><td>12</td><td>8</td><td>11</td><td>10</td><td>478.77</td><td>600.06</td><td>582.03</td><td>1570.36</td><td>1068.45</td></tr>
+			<tr><td>AlMg_20</td><td>20</td><td>125/125</td><td>208.00</td><td>11</td><td>12</td><td>10</td><td>11</td><td>10</td><td>549.07</td><td>716.65</td><td>739.39</td><td>2444.22</td><td>1473.90</td></tr>
+			<tr><td>AlMg_24</td><td>24</td><td>152/151</td><td>252.00</td><td>12</td><td>15</td><td>10</td><td>12</td><td>9</td><td>681.84</td><td>1087.62</td><td>917</td><td>2936.36</td><td>1967.15</td></tr>
+			<tr><td>AlMg_32</td><td>32</td><td>205/204</td><td>340.00</td><td>12</td><td>18</td><td>11</td><td>12</td><td>11</td><td>1157.04</td><td>2112.69</td><td>1791.67</td><td>6172.66</td><td>4241.29</td></tr>
+			<tr><td>AlMg_40</td><td>40</td><td>250/250</td><td>416.00</td><td>14</td><td>17</td><td>10</td><td>14</td><td>10</td><td>973.02</td><td>1714.79</td><td>1464.15</td><td>8017.95</td><td>3046.58</td></tr>
+			<tr><td>AlMg_48</td><td>48</td><td>303/302</td><td>504.00</td><td>14</td><td>18</td><td>12</td><td>14</td><td>12</td><td>1906.74</td><td>3346.23</td><td>2724.96</td><td>17291.40</td><td>9187.28</td></tr>
+			<tr><td>AlMg_8</td><td>8</td><td>52/50</td><td>84.00</td><td>9</td><td>9</td><td>8</td><td>9</td><td>8</td><td>649.35</td><td>534.39</td><td>648.55</td><td>1072.53</td><td>967.14</td></tr>
+			<tr><td>AlMg_pd04_12</td><td>12</td><td>25/19</td><td>29.00</td><td>15</td><td>14</td><td>9</td><td>12</td><td>9</td><td>221.73</td><td>194.11</td><td>222.61</td><td>351.35</td><td>210.47</td></tr>
+			<tr><td>AlMg_pd04_16</td><td>16</td><td>31/25</td><td>42.00</td><td>10</td><td>17</td><td>11</td><td>10</td><td>11</td><td>191.41</td><td>228.29</td><td>246.19</td><td>457.17</td><td>231.07</td></tr>
+			<tr><td>AlMg_pd04_20</td><td>20</td><td>34/29</td><td>48.00</td><td>9</td><td>16</td><td>11</td><td>9</td><td>10</td><td>200.75</td><td>245.34</td><td>258.99</td><td>539.57</td><td>239.76</td></tr>
+			<tr><td>AlMg_pd04_24</td><td>24</td><td>40/36</td><td>60.00</td><td>11</td><td>17</td><td>11</td><td>11</td><td>11</td><td>322.84</td><td>296.45</td><td>372.83</td><td>734.89</td><td>324.16</td></tr>
+			<tr><td>AlMg_pd04_32</td><td>32</td><td>52/50</td><td>84.00</td><td>11</td><td>18</td><td>14</td><td>11</td><td>14</td><td>423.86</td><td>546.84</td><td>554.33</td><td>1827.68</td><td>633.10</td></tr>
+			<tr><td>AlMg_pd04_40</td><td>40</td><td>58/58</td><td>96.00</td><td>12</td><td>21</td><td>13</td><td>12</td><td>13</td><td>390.62</td><td>516.72</td><td>464.66</td><td>1650.82</td><td>557.62</td></tr>
+			<tr><td>AlMg_pd04_48</td><td>48</td><td>73/72</td><td>120.00</td><td>16</td><td>24</td><td>14</td><td>16</td><td>14</td><td>673.30</td><td>1155.07</td><td>664.52</td><td>3492.07</td><td>1054.92</td></tr>
+			<tr><td>AlMg_pd04_8</td><td>8</td><td>20/14</td><td>20.00</td><td>8</td><td>11</td><td>7</td><td>8</td><td>7</td><td>235.96</td><td>236.58</td><td>225.13</td><td>373.60</td><td>226.02</td></tr>
+			<tr><td>LiLaH_12</td><td>12</td><td>23/17</td><td>26.00</td><td>17</td><td>14</td><td>15</td><td>17</td><td>16</td><td>226.40</td><td>131.90</td><td>206.41</td><td>255.83</td><td>216.62</td></tr>
+			<tr><td>LiLaH_16</td><td>16</td><td>24/18</td><td>28.00</td><td>12</td><td>12</td><td>11</td><td>12</td><td>11</td><td>225.04</td><td>171.66</td><td>211.87</td><td>283.94</td><td>232.98</td></tr>
+			<tr><td>LiLaH_20</td><td>20</td><td>27/21</td><td>34.00</td><td>18</td><td>19</td><td>14</td><td>18</td><td>14</td><td>267.81</td><td>192.83</td><td>244.17</td><td>353.85</td><td>236.24</td></tr>
+			<tr><td>LiLaH_24</td><td>24</td><td>34/29</td><td>48.00</td><td>13</td><td>16</td><td>13</td><td>13</td><td>12</td><td>291.41</td><td>264.88</td><td>332.78</td><td>495.24</td><td>384.76</td></tr>
+			<tr><td>LiLaH_32</td><td>32</td><td>39/35</td><td>58.00</td><td>16</td><td>20</td><td>15</td><td>16</td><td>15</td><td>371.52</td><td>360.40</td><td>434.65</td><td>806.20</td><td>574.50</td></tr>
+			<tr><td>LiLaH_40</td><td>40</td><td>44/41</td><td>68.00</td><td>16</td><td>18</td><td>14</td><td>16</td><td>14</td><td>366.12</td><td>435.46</td><td>409.33</td><td>1198.37</td><td>588.10</td></tr>
+			<tr><td>LiLaH_48</td><td>48</td><td>65/65</td><td>108.00</td><td>200[4.0e-07]</td><td>179</td><td>200[6.8e-07]</td><td>119</td><td>200[7.2e-06]</td><td>3962.15</td><td>5435.31</td><td>4950.97</td><td>12073.10</td><td>10576.50</td></tr>
+			<tr><td>LiLaH_8</td><td>8</td><td>21/15</td><td>22.00</td><td>11</td><td>11</td><td>10</td><td>11</td><td>11</td><td>223.21</td><td>143.95</td><td>196.70</td><td>266.47</td><td>208.74</td></tr>
+		</tbody>
+	</table>
+	</center>
+
+	<center>
+	<img class="thumbnail" src="time.png" onclick="openFullscreen(this)">
+	<img class="thumbnail" src="time_diff.png" onclick="openFullscreen(this)">
+	<img class="thumbnail" src="time_re.png" onclick="openFullscreen(this)">
+	<div class="imagetitle">Image 1. The comparsion of total time and price by different ABACUS methods (cpu-cg/cpu-dav/dcu-cg/dcu-dav) and by QE. The price of cpu is 2.56 Yuan/Hour, and the price of DCU is 0.6*4=2.4 Yuan/hour. (left: time and price of different methods (the total time and price of all examples are listed in parentheses), middle: difference time and price between ABACUS methods and QE dav, right: related time and price of ABACUS methods to QE dav)</div>
+	</center>
+
+
+    <div class="overlay" id="overlay" onclick="closeFullscreen()">
+        <img id="fullscreenImage" src="">
+    </div>
+    	<script>
+
+        var overlay = document.getElementById("overlay");
+        var fullscreenImage = document.getElementById("fullscreenImage");
+        
+        function openFullscreen(imgElement) {
+            fullscreenImage.src = imgElement.src; 
+            overlay.style.display = "block";
+        }
+        
+        function closeFullscreen() {
+            overlay.style.display = "none";
+            fullscreenImage.src = ""
+        }
+        
+    </script>
+    
+</body>
+</html>

@@ -7,11 +7,45 @@
     <title>ABACUS Test Report</title>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            myFunction()
+            var urlParams = new URLSearchParams(window.location.search);
+            var pname = urlParams.get('pname');
+            if (pname == null) {
+                pname = "performance";
+            }
+            loadContent(pname)
         });
 
+        var subdirectories = {
+            'alloy': ['eos', 'scf', 'dcu', 'relax', 'symmetry'],
+            'dpa': ['dcu']
+        };
+
+        function updateSubdirectoryButtons(pageName) {
+            var directoryName = pageName.split('/')[0];
+
+            var subdirectoryNames = subdirectories[directoryName];
+
+            // hide all subdirectory buttons
+            for (var key in subdirectories) {
+                for (var i = 0; i < subdirectories[key].length; i++) {
+                    var button = document.getElementById('button-' + key + '/' + subdirectories[key][i]);
+                    if (button) {
+                        button.style.display = 'none';
+                    }
+                }
+            }
+
+            // show the button of the current page
+            if (subdirectoryNames) {
+                for (var i = 0; i < subdirectoryNames.length; i++) {
+                    var button = document.getElementById('button-' + directoryName + '/' + subdirectoryNames[i]);
+                    button.style.display = 'block';
+                }
+            }
+        }
+
         function loadContent(pageName) {
-            pageName = updateAlloyButtom(pageName);
+            updateSubdirectoryButtons(pageName);
 
             if (pageName == "performance") {
                 document.getElementById('content').innerHTML = `
@@ -29,35 +63,8 @@
             console.log(pageName);
             console.log(window.location.href)
             var NewURL = "index.html" + "?pname=" + pageName;
-            window.history.pushState({path: NewURL}, '', NewURL);
+            window.history.pushState({ path: NewURL }, '', NewURL);
             console.log(window.location.href)
-        }
-
-        function updateAlloyButtom(pageName){
-            var buttonNames = ['eos', 'scf', 'dcu', 'relax', 'symmetry'];
-            if (pageName.startsWith("alloy/")) {
-                var display = "block";
-                if (pageName == "alloy/alloy") {
-                    pageName = "alloy/eos";
-                }
-            }
-            else {
-                var display = "none";  
-            }
-            for (var i = 0; i < buttonNames.length; i++) {
-                var button = document.getElementById('button-alloy/' + buttonNames[i]);
-                button.style.display = display;
-            }
-            return pageName;
-        }
-
-        function myFunction() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var pname = urlParams.get('pname');
-            if (pname == null) {
-                pname = "performance";
-            }
-            loadContent(pname) 
         }
 
         function updateActiveButton(pageName) {
@@ -76,12 +83,18 @@
                     activeButton.classList.add('selected');
                 }
             }
+            else if (pageName.startsWith("dpa/")) {
+                const activeButton = document.getElementById('button-dpa/dpa');
+                if (activeButton) {
+                    activeButton.classList.add('selected');
+                }
+            }
         }
 
         function resizeIframe(obj) {
-                obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight + 10) + 'px';
+            obj.style.height = (obj.contentWindow.document.documentElement.scrollHeight + 10) + 'px';
         }
-        
+
     </script>
     <style>
         body {
@@ -140,7 +153,8 @@
             display: flex;
             flex-wrap: wrap;
         }
-        .button-sublist.selected{
+
+        .button-sublist.selected {
             background-color: black;
         }
     </style>
@@ -151,21 +165,36 @@
         <h1>ABACUS Test Report</h1>
         <nav>
             <ul>
-                <button class="button" id="button-performance" onclick="loadContent('performance'); return false; ">PerformanceTest</a>
-                <button class="button" id="button-bda/bda" onclick="loadContent('bda/bda'); return false;">Battery</button>
-                <button class="button" id="button-sc/sc" onclick="loadContent('sc/sc'); return false;">Semi-Conductor</button>
-                <button class="button" id="button-alloy/alloy" onclick="loadContent('alloy/alloy'); return false;">Alloy</button>
-                <button class="button" id="button-mathlib/mathlib" onclick="loadContent('mathlib/mathlib'); return false;">MathLib</button>
+                <button class="button" id="button-performance"
+                    onclick="loadContent('performance'); return false; ">PerformanceTest</a>
+                    <button class="button" id="button-bda/bda"
+                        onclick="loadContent('bda/bda'); return false;">Battery</button>
+                    <button class="button" id="button-sc/sc"
+                        onclick="loadContent('sc/sc'); return false;">Semi-Conductor</button>
+                    <button class="button" id="button-alloy/alloy"
+                        onclick="loadContent('alloy/eos'); return false;">Alloy</button>
+                    <button class="button" id="button-dpa/dpa"
+                        onclick="loadContent('dpa/dcu'); return false;">DPA</button>
+                    <button class="button" id="button-mathlib/mathlib"
+                        onclick="loadContent('mathlib/mathlib'); return false;">MathLib</button>
             </ul>
-            <ul class="button-sublist">   
-                <button class="button" id="button-alloy/eos" style="display: none;" onclick="loadContent('alloy/eos'); return false;">eos</button>
-                <button class="button" id="button-alloy/relax" style="display: none;" onclick="loadContent('alloy/relax'); return false;">relax</button>
-                <button class="button" id="button-alloy/scf" style="display: none;" onclick="loadContent('alloy/scf'); return false;">scf</button>
-                <button class="button" id="button-alloy/dcu" style="display: none;" onclick="loadContent('alloy/dcu'); return false;">dcu</button>
-                <button class="button" id="button-alloy/symmetry" style="display: none;" onclick="loadContent('alloy/symmetry'); return false;">symmetry</button>
+            <ul class="button-sublist">
+                <button class="button" id="button-alloy/eos" style="display: none;"
+                    onclick="loadContent('alloy/eos'); return false;">eos</button>
+                <button class="button" id="button-alloy/relax" style="display: none;"
+                    onclick="loadContent('alloy/relax'); return false;">relax</button>
+                <button class="button" id="button-alloy/scf" style="display: none;"
+                    onclick="loadContent('alloy/scf'); return false;">scf</button>
+                <button class="button" id="button-alloy/dcu" style="display: none;"
+                    onclick="loadContent('alloy/dcu'); return false;">dcu</button>
+                <button class="button" id="button-alloy/symmetry" style="display: none;"
+                    onclick="loadContent('alloy/symmetry'); return false;">symmetry</button>
+
+                <button class="button" id="button-dpa/dcu" style="display: none;"
+                    onclick="loadContent('dpa/dcu'); return false;">dcu</button>
             </ul>
         </nav>
-        <div id="content">    
+        <div id="content">
         </div>
     </div>
 
