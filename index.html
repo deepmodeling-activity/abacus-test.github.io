@@ -44,6 +44,64 @@
             }
         }
 
+        function fetchDatesAndCreateDropdown(pageName) {
+            var directoryName = pageName;
+            return fetch('results/' + directoryName + '/dates')
+                .then(response => {
+                    if (!response.ok) {
+                        document.getElementById('content').innerHTML = `
+                        <iframe src="results/${pageName}.html" onload="resizeIframe(this)"></iframe>
+                        `;
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    var dates = data.split('\n');
+
+                    dates = dates.filter(function(date) {
+                        return date.trim() !== '';
+                    });
+
+                    dates.sort(function(a, b) {
+                        return b.localeCompare(a);
+                    });
+
+                    var select = document.createElement('select');
+                    select.style.width = '200px';
+                    select.style.height = '30px';
+                    select.style.border = '1px solid #ccc';
+                    select.style.borderRadius = '4px';
+                    select.style.fontSize = '16px';
+                    select.style.padding = '5px';
+                    select.style.backgroundColor = '#f8f8f8';
+                    select.onchange = function() {
+                        document.getElementById('iframe').src = 'results/' + directoryName + '/' + this.value + '/index.html';
+                    };
+                
+                    for (var i = 0; i < dates.length; i++) {
+                        var option = document.createElement('option');
+                        option.value = dates[i];
+                        option.text = dates[i];
+                        select.appendChild(option);
+                    }
+                
+                    document.getElementById('content').innerHTML = '';
+                    document.getElementById('content').appendChild(select);
+                
+
+                    var iframe = document.createElement('iframe');
+                    iframe.id = 'iframe';
+                    iframe.onload = function() { resizeIframe(this); };
+                    document.getElementById('content').appendChild(iframe);
+                
+                    select.onchange();
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        }
+
         function loadContent(pageName) {
             updateSubdirectoryButtons(pageName);
 
@@ -55,9 +113,10 @@
                 `;
             }
             else {
-                document.getElementById('content').innerHTML = `
-                <iframe src="results/${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
-                `;
+                fetchDatesAndCreateDropdown(pageName);
+                //document.getElementById('content').innerHTML = `
+                //<iframe src="results/${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
+                //`;
             }
             updateActiveButton(pageName);
             console.log(pageName);
@@ -167,16 +226,16 @@
             <ul>
                 <button class="button" id="button-performance"
                     onclick="loadContent('performance'); return false; ">PerformanceTest</a>
-                    <button class="button" id="button-bda/bda"
-                        onclick="loadContent('bda/bda'); return false;">Battery</button>
-                    <button class="button" id="button-sc/sc"
-                        onclick="loadContent('sc/sc'); return false;">Semi-Conductor</button>
+                    <button class="button" id="button-bda"
+                        onclick="loadContent('bda'); return false;">Battery</button>
+                    <button class="button" id="button-sc"
+                        onclick="loadContent('sc'); return false;">Semi-Conductor</button>
                     <button class="button" id="button-alloy/alloy"
                         onclick="loadContent('alloy/eos'); return false;">Alloy</button>
                     <button class="button" id="button-dpa/dpa"
                         onclick="loadContent('dpa/dcu'); return false;">DPA</button>
-                    <button class="button" id="button-mathlib/mathlib"
-                        onclick="loadContent('mathlib/mathlib'); return false;">MathLib</button>
+                    <button class="button" id="button-mathlib"
+                        onclick="loadContent('mathlib'); return false;">MathLib</button>
             </ul>
             <ul class="button-sublist">
                 <button class="button" id="button-alloy/eos" style="display: none;"
