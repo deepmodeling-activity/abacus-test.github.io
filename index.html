@@ -75,8 +75,22 @@
                     select.style.fontSize = '16px';
                     select.style.padding = '5px';
                     select.style.backgroundColor = '#f8f8f8';
-                    select.onchange = function() {
-                        document.getElementById('iframe').src = 'results/' + directoryName + '/' + this.value + '/index.html';
+                    select.onchange = function () {
+                        return new Promise((resolve, reject) => {
+                            var iframe = document.getElementById('iframe');
+                            iframe.onload = function () {
+                                resizeIframe(this);
+                                resolve();
+                            };
+                            iframe.src = 'results/' + directoryName + '/' + this.value + '/index.html';
+                        }).then(() => {
+                            if (pageName == "performance") {
+                                document.getElementById('content').innerHTML += `
+                                    <iframe src="results/performance/comment.html" onload="resizeIframe(this)"></iframe>
+                                    <iframe src="results/performance/all.html" onload="resizeIframe(this)"></iframe>
+                                `;
+                            }
+                        });
                     };
                 
                     for (var i = 0; i < dates.length; i++) {
@@ -87,14 +101,14 @@
                     }
                 
                     document.getElementById('content').innerHTML = '';
-                    document.getElementById('content').appendChild(select);
-                
+                    document.getElementById('content').appendChild(select);               
+
+                    
 
                     var iframe = document.createElement('iframe');
                     iframe.id = 'iframe';
                     iframe.onload = function() { resizeIframe(this); };
                     document.getElementById('content').appendChild(iframe);
-                
                     select.onchange();
                 })
                 .catch(error => {
@@ -104,20 +118,7 @@
 
         function loadContent(pageName) {
             updateSubdirectoryButtons(pageName);
-
-            if (pageName == "performance") {
-                document.getElementById('content').innerHTML = `
-                <iframe src="results/performance/result.html" onload="resizeIframe(this)"></iframe>
-                <iframe src="results/performance/comment.html" onload="resizeIframe(this)"></iframe>
-                <iframe src="results/performance/all.html" onload="resizeIframe(this)"></iframe>
-                `;
-            }
-            else {
-                fetchDatesAndCreateDropdown(pageName);
-                //document.getElementById('content').innerHTML = `
-                //<iframe src="results/${pageName}.html" id="iframe" onload="resizeIframe(this)"></iframe>
-                //`;
-            }
+            fetchDatesAndCreateDropdown(pageName);
             updateActiveButton(pageName);
             console.log(pageName);
             console.log(window.location.href)
