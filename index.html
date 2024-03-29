@@ -58,7 +58,7 @@
                 })
                 .then(data => {
                     var dates = data.split('\n');
-
+                    console.log(dates)
                     dates = dates.filter(function(date) {
                         return date.trim() !== '';
                     });
@@ -76,21 +76,7 @@
                     select.style.padding = '5px';
                     select.style.backgroundColor = '#f8f8f8';
                     select.onchange = function () {
-                        return new Promise((resolve, reject) => {
-                            var iframe = document.getElementById('iframe');
-                            iframe.onload = function () {
-                                resizeIframe(this);
-                                resolve();
-                            };
-                            iframe.src = 'results/' + directoryName + '/' + this.value + '/index.html';
-                        }).then(() => {
-                            if (pageName == "performance") {
-                                document.getElementById('content').innerHTML += `
-                                    <iframe src="results/performance/comment.html" onload="resizeIframe(this)"></iframe>
-                                    <iframe src="results/performance/all.html" onload="resizeIframe(this)"></iframe>
-                                `;
-                            }
-                        });
+                        iframe.src = 'results/' + directoryName + '/' + this.value + '/index.html';
                     };
                 
                     for (var i = 0; i < dates.length; i++) {
@@ -103,13 +89,25 @@
                     document.getElementById('content').innerHTML = '';
                     document.getElementById('content').appendChild(select);               
 
-                    
-
                     var iframe = document.createElement('iframe');
                     iframe.id = 'iframe';
                     iframe.onload = function() { resizeIframe(this); };
                     document.getElementById('content').appendChild(iframe);
                     select.onchange();
+
+                    if (pageName == "performance") {
+                        var iframe1 = document.createElement('iframe');
+                        iframe1.id = 'iframe1';
+                        iframe1.onload = function() { resizeIframe(this); };
+                        iframe1.src = "results/performance/comment.html"
+                        document.getElementById('content').appendChild(iframe1);
+
+                        var iframe2 = document.createElement('iframe');
+                        iframe2.id = 'iframe2';
+                        iframe2.onload = function() { resizeIframe(this); };
+                        iframe2.src = "results/performance/all.html"
+                        document.getElementById('content').appendChild(iframe2);
+                    }
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
