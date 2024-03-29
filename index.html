@@ -17,7 +17,7 @@
 
         var subdirectories = {
             'alloy': ['eos', 'scf', 'dcu', 'relax', 'symmetry'],
-            'dpa': ['dcu']
+            'dpa': ['StructureExplorer']
         };
 
         function updateSubdirectoryButtons(pageName) {
@@ -58,7 +58,6 @@
                 })
                 .then(data => {
                     var dates = data.split('\n');
-                    console.log(dates)
                     dates = dates.filter(function(date) {
                         return date.trim() !== '';
                     });
@@ -232,7 +231,7 @@
                     <button class="button" id="button-alloy/alloy"
                         onclick="loadContent('alloy/eos'); return false;">Alloy</button>
                     <button class="button" id="button-dpa/dpa"
-                        onclick="loadContent('dpa/dcu'); return false;">DPA</button>
+                        onclick="loadContent('dpa/StructureExplorer'); return false;">DPA</button>
                     <button class="button" id="button-mathlib"
                         onclick="loadContent('mathlib'); return false;">MathLib</button>
             </ul>
@@ -248,8 +247,8 @@
                 <button class="button" id="button-alloy/symmetry" style="display: none;"
                     onclick="loadContent('alloy/symmetry'); return false;">symmetry</button>
 
-                <button class="button" id="button-dpa/dcu" style="display: none;"
-                    onclick="loadContent('dpa/dcu'); return false;">dcu</button>
+                <button class="button" id="button-dpa/StructureExplorer" style="display: none;"
+                    onclick="loadContent('dpa/StructureExplorer'); return false;">StructureExplorer</button>
             </ul>
         </nav>
         <div id="content">
