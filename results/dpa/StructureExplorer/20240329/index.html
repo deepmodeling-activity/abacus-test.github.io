@@ -1,0 +1,149 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: left;
+        }
+        
+        .head1{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2; 
+            margin-top: 1rem;   
+        }
+        
+        .head2{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+        
+        .head3{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+
+        .tabletitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+        
+        .imagetitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+
+        .doc {
+            font-family: Verdana, sans-serif;
+            text-align: left;
+            display: inline-block;
+            font-size: 16px;
+            width: 100%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        #keys table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        #keys td {
+          border: none;
+          padding: 5px;
+          text-align: left;
+          line-height: 0.8;
+        }
+        
+        img {
+            max-width: 600px;
+            max-height: 600px;
+            height: auto;
+            cursor: zoom-in;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-out;
+        }
+    </style>
+</head>
+
+<body>
+	<table id="keys">
+		<tr><td><strong>Test_date</strong></td><td>:</td><td>2024-03-29</td></tr>
+		<tr><td><strong>Version</strong></td><td>:</td><td>v3.6.0(a7c1865 (Thu Mar 28 09:05:39 2024 +0800))</td></tr>
+		<tr><td><strong>Job_address</strong></td><td>:</td><td><a href="https://app.bohrium.dp.tech/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-abacustest-v0.3.106-59120a">link</a></td></tr>
+		<tr><td><strong>Targets</strong></td><td>:</td><td>ABACUS DCU device with CG method</td></tr>
+		<tr><td><strong>Properties</strong></td><td>:</td><td>energy/force/stress/virial/time</td></tr>
+	</table>
+
+	<div class="head1">1. Introduction</div>
+
+	<div class="doc">    Label cpu-cg/cpu-dav/dcu-cg/dcu-dav is the ABACUS job calculated on CPU or DCU with ks_solver cg or dav. The CPU calculation is performed on Bohrium platform with c32_m128_cpu node, and DCU calculation is performed on Sugon platform with kshdnormal node (4DCU+32CPU). Same calculations on CPU with 'dav' method is also calculated by QE v7.0. For all calculations, symmetry is set to 0, ecutwfc is set to 100 Ry, ecutwfc is set to 1e-8, and kspacing is set to 0.08 1/Bohr (in QE, the K point numbers are same with that converting from kspacing). All calculations use pseudopotentials SG15_ONCV_v1.0_upf, and extra calculation with pd04 pseudopotential is used for the AlMg system, which has less valence electron number.</div>
+
+	<div class="head1">2. Result</div>
+
+
+
+
+	<center>
+	<img class="thumbnail" src="time.png" onclick="openFullscreen(this)">
+	<img class="thumbnail" src="time_diff.png" onclick="openFullscreen(this)">
+	<img class="thumbnail" src="time_re.png" onclick="openFullscreen(this)">
+	<div class="imagetitle">Figure 1. The comparsion of total time and price by different ABACUS methods (cpu-cg/cpu-dav/dcu-cg/dcu-dav) and by QE. The price of cpu is 2.56 Yuan/Hour, and the price of DCU is 0.6*4=2.4 Yuan/hour. (left: time and price of different methods (the total time and price of all examples are listed in parentheses), middle: difference time and price between ABACUS methods and QE dav, right: related time and price of ABACUS methods to QE dav)</div>
+	</center>
+
+
+    <div class="overlay" id="overlay" onclick="closeFullscreen()">
+        <img id="fullscreenImage" src="">
+    </div>
+    	<script>
+
+        var overlay = document.getElementById("overlay");
+        var fullscreenImage = document.getElementById("fullscreenImage");
+        
+        function openFullscreen(imgElement) {
+            fullscreenImage.src = imgElement.src; 
+            overlay.style.display = "block";
+        }
+        
+        function closeFullscreen() {
+            overlay.style.display = "none";
+            fullscreenImage.src = ""
+        }
+        
+    </script>
+    
+</body>
+</html>
