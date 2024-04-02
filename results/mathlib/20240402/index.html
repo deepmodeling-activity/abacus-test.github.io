@@ -1,0 +1,169 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: left;
+        }
+        
+        .head1{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2; 
+            margin-top: 1rem;   
+        }
+        
+        .head2{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+        
+        .head3{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+
+        .tabletitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+        
+        .imagetitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+
+        .doc {
+            font-family: Verdana, sans-serif;
+            text-align: left;
+            display: inline-block;
+            font-size: 16px;
+            width: 100%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        #keys table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        #keys td {
+          border: none;
+          padding: 5px;
+          text-align: left;
+          line-height: 0.8;
+        }
+        
+        img {
+            max-width: 600px;
+            max-height: 600px;
+            height: auto;
+            cursor: zoom-in;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-out;
+        }
+    </style>
+</head>
+
+<body>
+	<table id="keys">
+		<tr><td><strong>Test_date</strong></td><td>:</td><td>2024-04-02</td></tr>
+		<tr><td><strong>Version</strong></td><td>:</td><td></td></tr>
+		<tr><td><strong>Job_address</strong></td><td>:</td><td><a href="https://app.bohrium.dp.tech/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-abacustest-v0.3.106-6a26e3">link</a></td></tr>
+		<tr><td><strong>Targets</strong></td><td>:</td><td>mathematical library accuracy</td></tr>
+		<tr><td><strong>Properties</strong></td><td>:</td><td>Sphere Bessel Function/Simpson Integral</td></tr>
+	</table>
+
+	<div class="head1">1. Introduction</div>
+
+	<div class="doc">    The precision tests of the mathematical library mainly focus on the accuracy, convergence, and stability of the ABACUS mathematical function calculations, as well as the consistency of the results across different computing platforms. Currently, we have provided precision error analysis charts for the Sphere Bessel Function of the First Kind and Simpson Integral, which are involved in the two-center integral calculations.</div>
+
+	<div class="head1">2. Results</div>
+
+	<center>
+	<div class="tabletitle">Table 1. Error Analysis of Sphere Bessel Function of the First Kind.</div>
+	<table border="2px">
+		<thead><tr><th>Order</th><th>l = 0</th><th>l = 1</th><th>l = 2</th><th>l = 3</th><th>l = 4</th><th>l = 5</th><th>l = 6</th><th>l = 7</th><th>l = 8</th><th>l = 9</th><th>l = 10</th><th>l = 11</th></tr></thead>
+		<tbody>			<tr><td>Old-Besselj(GNU)</td><td>Max: 1.94E-15(Mean: 8.22E-16)</td><td>Max: 3.78E-14(Mean: 4.87E-16)</td><td>Max: 5.33E-11(Mean: 3.10E-14)</td><td>Max: 2.22E-07(Mean: 5.49E-11)</td><td>Max: 1.39E-02(Mean: 3.01E-06)</td><td>Max: 4.99E-09(Mean: 3.55E-11)</td><td>Max: 4.96E-09(Mean: 5.77E-11)</td><td>Max: 5.33E-10(Mean: 7.87E-11)</td><td>Max: 1.71E-10(Mean: 2.17E-11)</td><td>Max: 4.82E-11(Mean: 5.37E-12)</td><td>Max: 1.21E-11(Mean: 1.21E-12)</td><td>Max: 2.76E-12(Mean: 2.49E-13)</td></tr>
+			<tr><td>Old-Besselj(Intel)</td><td>Max: 1.94E-15(Mean: 8.22E-16)</td><td>Max: 3.78E-14(Mean: 4.87E-16)</td><td>Max: 5.33E-11(Mean: 3.10E-14)</td><td>Max: 2.22E-07(Mean: 5.49E-11)</td><td>Max: 1.39E-02(Mean: 3.01E-06)</td><td>Max: 4.99E-09(Mean: 3.55E-11)</td><td>Max: 4.96E-09(Mean: 5.77E-11)</td><td>Max: 5.33E-10(Mean: 7.87E-11)</td><td>Max: 1.71E-10(Mean: 2.17E-11)</td><td>Max: 4.82E-11(Mean: 5.37E-12)</td><td>Max: 1.21E-11(Mean: 1.21E-12)</td><td>Max: 2.76E-12(Mean: 2.49E-13)</td></tr>
+			<tr><td>New-Besselj(GNU)</td><td>Max: 1.94E-15(Mean: 8.21E-16)</td><td>Max: 3.50E-15(Mean: 4.27E-16)</td><td>Max: 2.39E-15(Mean: 4.43E-16)</td><td>Max: 2.16E-15(Mean: 2.35E-16)</td><td>Max: 9.16E-16(Mean: 8.89E-17)</td><td>Max: 1.67E-16(Mean: 1.31E-17)</td><td>Max: 7.63E-17(Mean: 4.10E-18)</td><td>Max: 4.51E-17(Mean: 3.05E-18)</td><td>Max: 1.21E-17(Mean: 4.04E-19)</td><td>Max: 3.04E-18(Mean: 1.12E-19)</td><td>Max: 1.57E-18(Mean: 9.54E-20)</td><td>Max: 4.88E-19(Mean: 2.52E-20)</td></tr>
+			<tr><td>New-Besselj(Intel)</td><td>Max: 1.94E-15(Mean: 8.21E-16)</td><td>Max: 3.50E-15(Mean: 4.27E-16)</td><td>Max: 2.39E-15(Mean: 4.43E-16)</td><td>Max: 2.16E-15(Mean: 2.35E-16)</td><td>Max: 9.16E-16(Mean: 8.89E-17)</td><td>Max: 1.67E-16(Mean: 1.31E-17)</td><td>Max: 7.63E-17(Mean: 4.10E-18)</td><td>Max: 4.51E-17(Mean: 3.05E-18)</td><td>Max: 1.21E-17(Mean: 4.04E-19)</td><td>Max: 3.04E-18(Mean: 1.12E-19)</td><td>Max: 1.57E-18(Mean: 9.54E-20)</td><td>Max: 4.88E-19(Mean: 2.52E-20)</td></tr>
+		</tbody>
+	</table>
+	</center>
+
+	<div class="doc">    Note:</div>
+	<div class="doc">        - The reference results are calculated by Octave.</div>
+	<div class="doc">        - Sphere Bessel Function of the First Kind are performed on 5,000 grid points in the interval of (0,5).</div>
+	<div class="doc">        - Old-Besselj is referred to <i>ModuleBase::Sphbes::Spherical_Bessel</i> in ABACUS.</div>
+	<div class="doc">        - New-Besselj is referred to <i>ModuleBase::Sphbes::sphbesj</i> in ABACUS.</div>
+	<div class="doc">        - Tests are performed on GNU and Intel compilers in ABACUS docker environment.</div>
+
+	<center>
+	<img class="thumbnail" src="itf_errs.png" onclick="openFullscreen(this)">
+	<img class="thumbnail" src="exp_errs.png" onclick="openFullscreen(this)">
+	<div class="imagetitle">Figure 1. Error Analysis of Simpson Integral.</div>
+	</center>
+
+	<div class="doc">    Note:</div>
+	<div class="doc">        - Error analysis of Simpson Integral are performed on f(x) = 1 / (1 + x*x )and f(x) = exp(x).</div>
+	<div class="doc">        - Both uniform and non-uniform grids are tested.</div>
+	<div class="doc">        - Tests are performed on GNU and Intel compilers in ABACUS docker environment.</div>
+
+
+    <div class="overlay" id="overlay" onclick="closeFullscreen()">
+        <img id="fullscreenImage" src="">
+    </div>
+    	<script>
+
+        var overlay = document.getElementById("overlay");
+        var fullscreenImage = document.getElementById("fullscreenImage");
+        
+        function openFullscreen(imgElement) {
+            fullscreenImage.src = imgElement.src; 
+            overlay.style.display = "block";
+        }
+        
+        function closeFullscreen() {
+            overlay.style.display = "none";
+            fullscreenImage.src = ""
+        }
+        
+    </script>
+    
+</body>
+</html>
