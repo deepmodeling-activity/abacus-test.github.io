@@ -17,7 +17,7 @@
 
         var subdirectories = {
             'alloy': ['eos', 'scf', 'dcu', 'relax', 'symmetry'],
-            'dpa': ['StructureExplorer']
+            'dpa': ['StructureExplorer','Alloy']
         };
 
         function updateSubdirectoryButtons(pageName) {
@@ -249,6 +249,8 @@
 
                 <button class="button" id="button-dpa/StructureExplorer" style="display: none;"
                     onclick="loadContent('dpa/StructureExplorer'); return false;">StructureExplorer</button>
+                <button class="button" id="button-dpa/Alloy" style="display: none;"
+                    onclick="loadContent('dpa/Alloy'); return false;">Alloy</button>
             </ul>
         </nav>
         <div id="content">
