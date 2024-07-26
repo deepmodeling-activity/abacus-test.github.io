@@ -1,0 +1,293 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: left;
+        }
+        
+        .head1{
+            font-size: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2; 
+            margin-top: 1rem;   
+        }
+        
+        .head2{
+            font-size: 18px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+        
+        .head3{
+            font-size: 16px;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 2;
+        }
+
+        .tabletitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+        
+        .imagetitle{
+            font-size: 16px;
+            font-weight: bold;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+
+        .doc {
+            font-family: Verdana, sans-serif;
+            text-align: left;
+            display: inline-block;
+            font-size: 16px;
+            width: 100%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        #keys table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        #keys td {
+          border: none;
+          padding: 5px;
+          text-align: left;
+          line-height: 0.8;
+        }
+        
+        img {
+            max-width: 600px;
+            max-height: 600px;
+            height: auto;
+            cursor: zoom-in;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-out;
+        }
+    </style>
+</head>
+
+<body>
+	<table id="keys">
+		<tr><td><strong>Test_date</strong></td><td>:</td><td>2024-07-26</td></tr>
+		<tr><td><strong>Version</strong></td><td>:</td><td>v3.7.1(7a6fe6d (Fri Jul 26 15:30:42 2024 +0800))</td></tr>
+		<tr><td><strong>Job_address</strong></td><td>:</td><td><a href="https://app.bohrium.dp.tech/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fsched-abacustest-alloy-symm-ca65cb">link</a></td></tr>
+		<tr><td><strong>Targets</strong></td><td>:</td><td>symmetry on VS symmetry off</td></tr>
+		<tr><td><strong>Datasets</strong></td><td>:</td><td><a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fdatasets%2Falloy">link</a></td></tr>
+		<tr><td><strong>Properties</strong></td><td>:</td><td>energy/force/stress/irreducible k-point/point group</td></tr>
+	</table>
+
+	<div class="head1">1. Introduction</div>
+
+	<div class="doc">    This test utilized ABACUS to compute the SCF for a series of systems with symmetry set to 1 and 0, and compared the differences in energy, force, and stress between them.</div>
+	<div class="doc">    Generally, the issue of symmetry is only related to the point group and space group of the system. Therefore, we selected different structures of point and space groups for testing. At the same time, some problematic configurations related to symmetry will also be collected and added to the test set.</div>
+	<div class="doc">    We have performed the calculations with symemtry on and off by using VASP (<a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-abacustest-v0.3.45-cb7e6b">job link</a>) and QE (<a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fjob-abacustest-v0.3.45-a7af46">job link</a>) on the over 100 structures collectted at the first time. And based on the results, we have established the passing criteria of energy/force/virial. The criteria of force and stress is applied for each component. The pass ratio is the number of systems that meet the criteria divided by the total number of systems.</div>
+
+	<div class="head1">2. Results</div>
+
+	<center>
+	<img class="thumbnail" src="symm_delta.png" onclick="openFullscreen(this)">
+	<div class="imagetitle">Figure 1. The energy/force/stress difference between symmetry on and off.</div>
+	</center>
+
+	<center>
+	<div class="tabletitle">Table 1. the K points and irreducible K points, and point groups and point group in space groups, as well as the Energy/Force/Virial/Stress difference with closed symmetry analysis.</div>
+	<div class="head2">Pass/Total: <font color="red">71/106 (66.98%)</font></div>
+
+    <table border="2px">
+        <tbody>
+            <tr>
+                <td>Key</td>
+                <td>Pass/Total</td>
+                <td>Criteria</td>
+            </tr>
+        <tr>
+                <td>NormalEnd</td>
+                <td style="color:red">71/102</td> 
+                <td>bool(x)</td>
+            </tr>
+        <tr>
+                <td>&Delta;E/atom(meV)</td>
+                <td style="color:green">71/71</td> 
+                <td>x < 1</td>
+            </tr>
+        <tr>
+                <td>max(&Delta;F)(eV/A)</td>
+                <td style="color:green">71/71</td> 
+                <td>x < 0.1</td>
+            </tr>
+        <tr>
+                <td>max(&Delta;S)(kbar)</td>
+                <td style="color:green">71/71</td> 
+                <td>x < 10</td>
+            </tr>
+        </tbody>
+    </table>
+
+	<table border="2px">
+		<thead><tr><th>example</th><th>NormalEnd</th><th>&Delta;E/atom(meV)</th><th>max(&Delta;F)(eV/A)</th><th>max(&Delta;S)(kbar)</th><th>max(&Delta;V)(eV/atom)</th><th>KPoints</th><th>IBZK</th><th>PointGroup</th><th>PointGroupInSpaceGroup</th></tr></thead>
+		<tbody>			<tr><td>000_+</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>125</td><td>63</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>001_C_1+</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>64</td><td>36</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>002_C_1+C_1</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>125</td><td>63</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>003_C_1+C_1h</td><td><font color="green">True</font></td><td><font color="green">9.09e-10</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">5.70e-09</font></td><td>7.27e-11</td><td>60</td><td>24</td><td>C_1</td><td>C_1h</td></tr>
+			<tr><td>004_C_1+C_2</td><td><font color="green">True</font></td><td><font color="green">2.27e-10</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">1.00e-10</font></td><td>1.52e-12</td><td>96</td><td>52</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>005_C_1+C_2h</td><td><font color="green">True</font></td><td><font color="green">2.84e-10</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>96</td><td>52</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>006_C_1+C_2v</td><td><font color="green">True</font></td><td><font color="green">2.19e-06</font></td><td><font color="green">1.70e-04</font></td><td><font color="green">1.94e-03</font></td><td>2.92e-05</td><td>36</td><td>15</td><td>C_1</td><td>C_1h</td></tr>
+			<tr><td>007_C_1+C_3</td><td><font color="green">True</font></td><td><font color="green">3.34e-05</font></td><td><font color="green">3.86e-03</font></td><td><font color="green">0.08</font></td><td>6.09e-04</td><td>64</td><td>14</td><td>C_1</td><td>C_3</td></tr>
+			<tr><td>008_C_1h+C_1h</td><td><font color="green">True</font></td><td><font color="green">1.14e-10</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">1.00e-10</font></td><td>1.44e-12</td><td>54</td><td>28</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>009_C_1h+C_2h</td><td><font color="green">True</font></td><td><font color="green">4.06e-07</font></td><td><font color="green">1.80e-03</font></td><td><font color="green">0.04</font></td><td>4.67e-04</td><td>64</td><td>30</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>010_C_1h+C_2v</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>98</td><td>32</td><td>C_1h</td><td>C_2v</td></tr>
+			<tr><td>011_C_1h+C_3</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>72</td><td>40</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>012_C_1h+C_3v</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>64</td><td>36</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>013_C_1h+C_4v</td><td><font color="green">True</font></td><td><font color="green">5.62e-05</font></td><td><font color="green">5.58e-03</font></td><td><font color="green">0.31</font></td><td>3.77e-03</td><td>48</td><td>12</td><td>C_1h</td><td>C_4v</td></tr>
+			<tr><td>014_C_1h+D_2h</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>75</td><td>38</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>015_C_1h+D_3h</td><td><font color="green">True</font></td><td><font color="green">5.05e-05</font></td><td><font color="green">2.96e-04</font></td><td><font color="green">9.07e-04</font></td><td>1.30e-05</td><td>36</td><td>12</td><td>C_1</td><td>C_2v</td></tr>
+			<tr><td>016_C_1h+S_6</td><td><font color="green">True</font></td><td><font color="green">8.55e-05</font></td><td><font color="green">4.33e-06</font></td><td><font color="green">2.88e-05</font></td><td>4.24e-07</td><td>36</td><td>15</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>017_C_1+S_2</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>100</td><td>51</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>018_C_2+</td><td><font color="green">True</font></td><td><font color="green">1.14e-10</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">1.00e-10</font></td><td>1.03e-12</td><td>64</td><td>36</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>019_C_2+C_2</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>125</td><td>63</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>020_C_2+C_2v</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>27</td><td>8</td><td>C_2</td><td>C_2v</td></tr>
+			<tr><td>021_C_2+C_3</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>125</td><td>63</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>022_C_2+D_2</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>75</td><td>26</td><td>C_2</td><td>C_2</td></tr>
+			<tr><td>023_C_2+D_2_0</td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>
+			<tr><td>024_C_2+D_2_1</td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>
+			<tr><td>025_C_2+D_2d</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>48</td><td>12</td><td>C_2</td><td>D_2d</td></tr>
+			<tr><td>026_C_2+D_3</td><td><font color="green">True</font></td><td><font color="green">1.59e-09</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">3.00e-10</font></td><td>4.52e-12</td><td>64</td><td>36</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>027_C_2+D_3_4</td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>
+			<tr><td>028_C_2+D_3_5</td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>
+			<tr><td>029_C_2+D_6</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">1.00e-10</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>75</td><td>38</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>030_C_2h+C_2h</td><td><font color="green">True</font></td><td><font color="green">2.59e-05</font></td><td><font color="green">4.54e-03</font></td><td><font color="green">0.08</font></td><td>1.21e-03</td><td>45</td><td>15</td><td>C_2h</td><td>C_2h</td></tr>
+			<tr><td>031_C_2h+D_2h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>64</td><td>21</td><td>C_2h</td><td>D_2h</td></tr>
+			<tr><td>032_C_2h+D_3d</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>80</td><td>42</td><td>C_2h</td><td>D_3d</td></tr>
+			<tr><td>033_C_2h+D_4h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>75</td><td>12</td><td>C_2h</td><td>D_4h</td></tr>
+			<tr><td>034_C_2v+</td><td><font color="green">True</font></td><td><font color="green">5.31e-05</font></td><td><font color="green">1.29e-04</font></td><td><font color="green">0.05</font></td><td>6.17e-04</td><td>64</td><td>30</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>035_C_2v+C_2v</td><td><font color="green">True</font></td><td><font color="green">2.22e-05</font></td><td><font color="green">4.90e-03</font></td><td><font color="green">0.09</font></td><td>7.68e-04</td><td>80</td><td>21</td><td>C_2v</td><td>C_2v</td></tr>
+			<tr><td>036_C_2v+C_3v</td><td><font color="green">True</font></td><td><font color="green">2.27e-10</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">1.00e-10</font></td><td>1.21e-12</td><td>72</td><td>38</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>037_C_2v+C_4v</td><td><font color="green">True</font></td><td><font color="green">5.51e-03</font></td><td><font color="green">8.43e-03</font></td><td><font color="green">0.60</font></td><td>8.71e-03</td><td>75</td><td>24</td><td>C_2v</td><td>C_4v</td></tr>
+			<tr><td>038_C_2v+D_2d</td><td><font color="green">True</font></td><td><font color="green">5.41e-05</font></td><td><font color="green">8.22e-04</font></td><td><font color="green">6.32e-04</font></td><td>8.13e-06</td><td>32</td><td>12</td><td>C_2v</td><td>D_2d</td></tr>
+			<tr><td>039_C_2v+D_2h</td><td><font color="green">True</font></td><td><font color="green">2.29e-03</font></td><td><font color="green">0.02</font></td><td><font color="green">0.30</font></td><td>2.94e-03</td><td>80</td><td>33</td><td>C_2v</td><td>D_2h</td></tr>
+			<tr><td>040_C_2v+D_3h</td><td><font color="green">True</font></td><td><font color="green">5.45e-06</font></td><td><font color="green">6.58e-04</font></td><td><font color="green">0.02</font></td><td>3.26e-04</td><td>64</td><td>30</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>041_C_3+C_3</td><td><font color="green">True</font></td><td><font color="green">4.84e-05</font></td><td><font color="green">2.64e-03</font></td><td><font color="green">4.91e-03</font></td><td>5.26e-05</td><td>64</td><td>14</td><td>C_3</td><td>C_3</td></tr>
+			<tr><td>042_C_3+C_3v</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>196</td><td>99</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>043_C_3+D_3</td><td><font color="green">True</font></td><td><font color="green">4.28e-06</font></td><td><font color="green">1.74e-03</font></td><td><font color="green">0.04</font></td><td>4.07e-04</td><td>64</td><td>13</td><td>C_3</td><td>D_3</td></tr>
+			<tr><td>044_C_3+D_3h</td><td><font color="green">True</font></td><td><font color="green">9.09e-10</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>196</td><td>99</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>045_C_3h+</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>64</td><td>36</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>046_C_3h+C_3h</td><td><font color="green">True</font></td><td><font color="green">2.53e-07</font></td><td><font color="green">6.41e-04</font></td><td><font color="green">1.96e-03</font></td><td>2.60e-05</td><td>45</td><td>15</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>047_C_3+S_6</td><td><font color="green">True</font></td><td><font color="green">1.65e-04</font></td><td><font color="green">7.00e-04</font></td><td><font color="green">1.62e-03</font></td><td>1.57e-05</td><td>120</td><td>42</td><td>C_1</td><td>C_1h</td></tr>
+			<tr><td>048_C_3v+</td><td><font color="green">True</font></td><td><font color="green">2.37e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">1.46e-08</font></td><td>1.22e-10</td><td>125</td><td>63</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>049_C_3v+C_3v</td><td><font color="green">True</font></td><td><font color="green">9.24e-06</font></td><td><font color="green">9.53e-05</font></td><td><font color="green">8.94e-03</font></td><td>1.60e-04</td><td>64</td><td>13</td><td>C_3v</td><td>C_3v</td></tr>
+			<tr><td>050_C_3v+C_6v</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>75</td><td>10</td><td>C_3v</td><td>C_6v</td></tr>
+			<tr><td>051_C_3v+D_2h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>125</td><td>63</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>052_C_3v+D_3d</td><td><font color="green">True</font></td><td><font color="green">1.76e-06</font></td><td><font color="green">2.27e-05</font></td><td><font color="green">7.67e-03</font></td><td>1.37e-04</td><td>64</td><td>13</td><td>C_3v</td><td>C_3v</td></tr>
+			<tr><td>053_C_3v+D_3h</td><td><font color="green">True</font></td><td><font color="green">9.09e-10</font></td><td><font color="green">1.00e-10</font></td><td><font color="green">1.00e-10</font></td><td>1.79e-12</td><td>72</td><td>40</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>054_C_3v+D_6h</td><td><font color="green">True</font></td><td><font color="green">1.29e-04</font></td><td><font color="green">0.02</font></td><td><font color="green">0.16</font></td><td>2.88e-03</td><td>72</td><td>40</td><td>C_1</td><td>S_2</td></tr>
+			<tr><td>055_C_3v+O</td><td><font color="green">True</font></td><td><font color="green">2.77e-06</font></td><td><font color="green">1.85e-05</font></td><td><font color="green">1.03e-03</font></td><td>1.78e-05</td><td>64</td><td>13</td><td>C_3v</td><td>C_3v</td></tr>
+			<tr><td>056_C_3v+T_d</td><td><font color="green">True</font></td><td><font color="green">1.71e-05</font></td><td><font color="green">1.63e-03</font></td><td><font color="green">3.51e-03</font></td><td>3.27e-05</td><td>125</td><td>10</td><td>C_3v</td><td>T_d</td></tr>
+			<tr><td>057_C_4+D_4</td><td><font color="green">True</font></td><td><font color="green">2.82e-08</font></td><td><font color="green">7.79e-06</font></td><td><font color="green">2.30e-03</font></td><td>3.42e-05</td><td>64</td><td>13</td><td>C_4</td><td>D_4</td></tr>
+			<tr><td>058_C_4h+C_4h</td><td><font color="green">True</font></td><td><font color="green">1.46e-05</font></td><td><font color="green">4.22e-03</font></td><td><font color="green">0.26</font></td><td>2.34e-03</td><td>45</td><td>9</td><td>C_4h</td><td>D_4h</td></tr>
+			<tr><td>059_C_4h+D_4h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>64</td><td>13</td><td>C_4h</td><td>D_4h</td></tr>
+			<tr><td>060_C_4v+C_4v</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>144</td><td>40</td><td>C_4v</td><td>C_4v</td></tr>
+			<tr><td>061_C_4v+D_4h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>72</td><td>20</td><td>C_4v</td><td>D_4h</td></tr>
+			<tr><td>062_C_6+C_6</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>64</td><td>36</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>063_D_2+D_2</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>100</td><td>33</td><td>D_2</td><td>D_2</td></tr>
+			<tr><td>064_D_2+D_2h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>27</td><td>8</td><td>D_2</td><td>D_2h</td></tr>
+			<tr><td>065_D_2+D_6</td><td><font color="green">True</font></td><td><font color="green">4.57e-05</font></td><td><font color="green">0.02</font></td><td><font color="green">0.67</font></td><td>6.17e-03</td><td>48</td><td>14</td><td>D_2</td><td>D_2</td></tr>
+			<tr><td>066_D_2d+D_2d</td><td><font color="green">True</font></td><td><font color="green">0.02</font></td><td><font color="green">0.02</font></td><td><font color="green">1.51</font></td><td>0.01</td><td>150</td><td>48</td><td>D_2d</td><td>D_2d</td></tr>
+			<tr><td>067_D_2d+D_4h</td><td><font color="green">True</font></td><td><font color="green">5.56e-03</font></td><td><font color="green">0.02</font></td><td><font color="green">2.53</font></td><td>0.03</td><td>150</td><td>48</td><td>D_2d</td><td>D_4h</td></tr>
+			<tr><td>068_D_2h+D_2h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>98</td><td>32</td><td>D_2h</td><td>D_2h</td></tr>
+			<tr><td>069_D_2h+D_4h</td><td><font color="green">True</font></td><td><font color="green">2.13e-05</font></td><td><font color="green">4.54e-03</font></td><td><font color="green">0.10</font></td><td>2.23e-03</td><td>45</td><td>9</td><td>D_2h</td><td>D_4h</td></tr>
+			<tr><td>070_D_3d+</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>125</td><td>10</td><td>D_3d</td><td>O_h</td></tr>
+			<tr><td>071_D_3d+D_3d</td><td><font color="green">True</font></td><td><font color="green">4.07e-03</font></td><td><font color="green">0.06</font></td><td><font color="green">0.63</font></td><td>5.94e-03</td><td>98</td><td>32</td><td>D_3d</td><td>D_3d</td></tr>
+			<tr><td>072_D_3d+D_6h</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">4.00e-10</font></td><td>3.53e-12</td><td>64</td><td>36</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>073_D_3d+O_h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>80</td><td>36</td><td>C_2</td><td>C_4h</td></tr>
+			<tr><td>074_D_3h+D_3h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>96</td><td>28</td><td>C_2v</td><td>C_2v</td></tr>
+			<tr><td>075_D_3h+T_d</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>125</td><td>19</td><td>C_3v</td><td>C_3v</td></tr>
+			<tr><td>076_+D_4</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>48</td><td>26</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>077_D_4h+D_4h</td><td><font color="green">True</font></td><td><font color="green">4.02e-07</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">8.84e-04</font></td><td>7.07e-06</td><td>125</td><td>18</td><td>D_4h</td><td>D_4h</td></tr>
+			<tr><td>078_D_6h+D_6h</td><td><font color="green">True</font></td><td><font color="green">9.70e-05</font></td><td><font color="green">1.99e-04</font></td><td><font color="green">0.23</font></td><td>3.12e-03</td><td>64</td><td>12</td><td>D_6h</td><td>D_6h</td></tr>
+			<tr><td>079_+O_h</td><td><font color="green">True</font></td><td><font color="green">6.32e-08</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">1.51e-07</font></td><td>8.14e-10</td><td>216</td><td>112</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>080_O_h+O_h</td><td><font color="green">True</font></td><td><font color="green">5.61e-07</font></td><td><font color="green">2.63e-05</font></td><td><font color="green">0.03</font></td><td>5.05e-04</td><td>125</td><td>10</td><td>O_h</td><td>O_h</td></tr>
+			<tr><td>081_S_2+C_2h</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>48</td><td>18</td><td>S_2</td><td>D_2h</td></tr>
+			<tr><td>082_S_2+S_2</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>45</td><td>12</td><td>S_2</td><td>D_2h</td></tr>
+			<tr><td>083_S_2+S_6</td><td><font color="green">True</font></td><td><font color="green">2.28e-04</font></td><td><font color="green">9.31e-03</font></td><td><font color="green">0.54</font></td><td>4.93e-03</td><td>80</td><td>41</td><td>S_2</td><td>D_2h</td></tr>
+			<tr><td>084_S_4+D_2d</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>80</td><td>27</td><td>S_4</td><td>D_2d</td></tr>
+			<tr><td>085_S_6+</td><td><font color="green">True</font></td><td><font color="green">4.68e-08</font></td><td><font color="green">2.84e-05</font></td><td><font color="green">3.59e-05</font></td><td>4.19e-07</td><td>48</td><td>26</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>086_S_6+C_6h</td><td><font color="green">True</font></td><td><font color="green">4.19e-06</font></td><td><font color="green">0.01</font></td><td><font color="green">0.07</font></td><td>9.74e-04</td><td>36</td><td>15</td><td>S_2</td><td>C_2h</td></tr>
+			<tr><td>087_S_6+D_3d</td><td><font color="green">True</font></td><td><font color="green">3.41e-10</font></td><td><font color="green">1.00e-10</font></td><td><font color="green">1.00e-10</font></td><td>1.34e-12</td><td>36</td><td>19</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>088_S_6+S_6</td><td><font color="red">False</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td><font color="red">---</font></td><td>---</td><td>27</td><td>14</td><td>S_2</td><td>S_2</td></tr>
+			<tr><td>089_T_d+</td><td><font color="green">True</font></td><td><font color="green">7.86e-05</font></td><td><font color="green">1.42e-05</font></td><td><font color="green">0.16</font></td><td>2.82e-03</td><td>64</td><td>13</td><td>C_3v</td><td>C_3v</td></tr>
+			<tr><td>090_T_d+C_2h</td><td><font color="green">True</font></td><td><font color="green">4.55e-10</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>64</td><td>36</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>091_T_d+O</td><td><font color="green">True</font></td><td><font color="green">2.04e-07</font></td><td><font color="green">9.69e-05</font></td><td><font color="green">4.52e-04</font></td><td>5.96e-06</td><td>125</td><td>19</td><td>C_3v</td><td>C_3v</td></tr>
+			<tr><td>092_T_d+O_h</td><td><font color="green">True</font></td><td><font color="green">1.06e-04</font></td><td><font color="green">1.83e-04</font></td><td><font color="green">0.01</font></td><td>2.47e-04</td><td>64</td><td>13</td><td>C_3v</td><td>C_3v</td></tr>
+			<tr><td>093_T_d+T_d</td><td><font color="green">True</font></td><td><font color="green">1.83e-06</font></td><td><font color="green">8.96e-04</font></td><td><font color="green">0.04</font></td><td>3.44e-04</td><td>125</td><td>10</td><td>T_d</td><td>T_d</td></tr>
+			<tr><td>094_T_h+O_h</td><td><font color="green">True</font></td><td><font color="green">3.84e-05</font></td><td><font color="green">1.44e-03</font></td><td><font color="green">0.26</font></td><td>2.86e-03</td><td>64</td><td>10</td><td>T_h</td><td>O_h</td></tr>
+			<tr><td>095_T_h+T_h</td><td><font color="green">True</font></td><td><font color="green">4.36e-06</font></td><td><font color="green">9.51e-04</font></td><td><font color="green">0.03</font></td><td>3.52e-04</td><td>64</td><td>11</td><td>T_h</td><td>T_h</td></tr>
+			<tr><td>096_alloy-0</td><td><font color="green">True</font></td><td><font color="green">5.88e-03</font></td><td><font color="green">5.81e-03</font></td><td><font color="green">1.62</font></td><td>0.01</td><td>210</td><td>106</td><td>C_2h</td><td>C_2h</td></tr>
+			<tr><td>097_alloy-1</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>100</td><td>51</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>098_alloy-2</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>140</td><td>71</td><td>C_1</td><td>C_1</td></tr>
+			<tr><td>099_alloy-3</td><td><font color="green">True</font></td><td><font color="green">1.99e-05</font></td><td><font color="green">2.18e-05</font></td><td><font color="green">7.16e-03</font></td><td>1.01e-04</td><td>100</td><td>33</td><td>C_2h</td><td>C_2h</td></tr>
+			<tr><td>100_alloy-4</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">1.00e-10</font></td><td><font color="green">2.40e-08</font></td><td>4.05e-10</td><td>48</td><td>17</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>101_alloy-5</td><td><font color="green">True</font></td><td><font color="green">1.35e-03</font></td><td><font color="green">3.12e-05</font></td><td><font color="green">0.02</font></td><td>1.90e-04</td><td>125</td><td>27</td><td>C_2v</td><td>C_2v</td></tr>
+			<tr><td>102_alloy-6</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>100</td><td>51</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>103_alloy-7</td><td><font color="green">True</font></td><td><font color="green">0.04</font></td><td><font color="green">0.01</font></td><td><font color="green">2.50</font></td><td>0.04</td><td>100</td><td>33</td><td>D_4h</td><td>D_4h</td></tr>
+			<tr><td>104_alloy-8</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>100</td><td>51</td><td>C_1h</td><td>C_1h</td></tr>
+			<tr><td>105_alloy-9</td><td><font color="green">True</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td><font color="green">0.00e+00</font></td><td>0.00e+00</td><td>100</td><td>51</td><td>C_1h</td><td>C_1h</td></tr>
+		</tbody>
+	</table>
+	</center>
+
+
+    <div class="overlay" id="overlay" onclick="closeFullscreen()">
+        <img id="fullscreenImage" src="">
+    </div>
+    	<script>
+
+        var overlay = document.getElementById("overlay");
+        var fullscreenImage = document.getElementById("fullscreenImage");
+        
+        function openFullscreen(imgElement) {
+            fullscreenImage.src = imgElement.src; 
+            overlay.style.display = "block";
+        }
+        
+        function closeFullscreen() {
+            overlay.style.display = "none";
+            fullscreenImage.src = ""
+        }
+        
+    </script>
+    
+</body>
+</html>
