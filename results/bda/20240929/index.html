@@ -105,7 +105,6 @@
 		<tr><td><strong>Version</strong></td><td>:</td><td>v3.8.0(54659c6 (Sun Sep 29 12:12:33 2024 +0800))</td></tr>
 		<tr><td><strong>Job_address</strong></td><td>:</td><td><a href="https://app.bohrium.dp.tech/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fjobs%2Fsched-abacustest-bda-f76748">link</a></td></tr>
 		<tr><td><strong>Targets</strong></td><td>:</td><td>ABACUS +U</td></tr>
-		<tr><td><strong>Datasets</strong></td><td>:</td><td><a href="https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fdatasets%2Fbda">link</a></td></tr>
 		<tr><td><strong>Properties</strong></td><td>:</td><td>magmom/voltage</td></tr>
 	</table>
 
@@ -113,10 +112,15 @@
 
 	<div class="doc">    Simulation of battery materials is of great significance. In this test, ab-initio calculations were carried out on a series of typical battery systems (combination of Li/Na and Fe/Co/Ni/Mn/CrO2) by using ABACUS combined with the +U. Self-consistent field (SCF) calculations were performed, and the voltages were also calculated and compared with the results obtained by using VASP.</div>
 	<div class="doc">    For ABACUS calculation, we use SG15 pseudopotential and related DZP orbitals. The onsite radius is set to 4.0 bohr.</div>
+    <div class="doc">    The calculation of QE using the same pseudopotential, energy cutoff, k-point mesh, smearing method, and U value. The version of QE is 7.0.</div>
+    <div class="doc">    For VASP, using PAW pseudopotential, the ENCUT is 520 eV, KSPACING is 0.25 1/Angstrom, smearing is Gaussian with a width of 0.05 eV, and the U is same as ABACUS. The version of VASP is 5.4.4. All the structures are optimized first, and then a single point calculation is performed.</div>
+    <div class="doc">    The inputs can be found in https://github.com/deepmodeling-activity/abacus-test.github.io/tree/master/datasets/battery.</div>
 
 	<div class="head1">2. Results</div>
 
 	<div class="head2">2.1 Voltage</div>
+
+    <div class="doc">    Here, the voltage of a battery system is calculated by the energy to loss one cation Li or Na: V = -1 * [E(C_(1-X)MO_2) - E(C_(1-Y)MO_2) - (Y-X)E(C)] / (Y - X)    (Y>X), Where C is the cation, and M is the metal, X/Y is the ratio of the cation.</div>
 
 	<center>
 	<img class="thumbnail" src="voltage.png" onclick="openFullscreen(this)">
