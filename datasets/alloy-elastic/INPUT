@@ -1,0 +1,18 @@
+INPUT_PARAMETERS
+calculation	cell-relax
+basis_type	pw
+symmetry	0
+ecutwfc	100
+scf_thr	1e-09
+scf_nmax 200
+kspacing	0.08
+pseudo_rcut	10
+pseudo_mesh	1
+ks_solver	dav
+relax_nmax 	100
+force_thr	0.001
+stress_thr	0.5
+smearing_method gauss
+smearing_sigma  0.015
+cal_force 1
+cal_stress 1
