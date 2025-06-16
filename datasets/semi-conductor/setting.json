@@ -1,0 +1,113 @@
+{
+    "save_path": "results",
+    "prepare": {
+        "input_template": "INPUT.hse",
+        "example_template": [
+            "AlAs",
+            "AlN-WZ",
+            "AlP",
+            "AlSb",
+            "BAs",
+            "BN",
+            "BP",
+            "C",
+            "CdS-WZ",
+            "CdSe-WZ",
+            "CdTe",
+            "GaAs",
+            "GaP",
+            "GaSb",
+            "Ge",
+            "InAs",
+            "InN",
+            "InP",
+            "InSb",
+            "LiF",
+            "MgS",
+            "NaCl",
+            "Si",
+            "SiC",
+            "ZnS",
+            "ZnSe",
+            "ZnTe"
+        ]
+    },
+    "run_dft": [
+        {
+            "command": "OMP_NUM_THREADS=16 mpirun -np 1 abacus | tee out.log",
+            "group_size": 1,
+            "image": "registry.dp.tech/deepmodeling/abacus-intel:latest",
+            "bohrium": {
+                "scass_type": "c32_m64_cpu",
+                "job_type": "container",
+                "platform": "ali",
+		"on_demand":1
+            }
+        }
+    ],
+    "post_dft": {
+        "extra_files": [
+            "metrics_ref.json",
+            "post.py",
+            "criteria.json"
+        ],
+        "command": "python post.py",
+        "image": "registry.dp.tech/dptech/abacustest:latest",
+        "metrics": {
+            "before_command": true,
+            "dft_type": "abacus",
+            "metrics_name": [
+                "scf_steps",
+                "version",
+                "total_time",
+                "converge",
+                "normal_end",
+                "band_gap"
+            ],
+            "save_file": "metrics.json"
+        }
+    },
+    "report": {
+        "keys": {
+            "targets": "ABACUS HSE test on band gap of semiconductor systems",
+            "datasets": "<a href=\"https://labs.dp.tech/projects/abacustest/?request=GET%3A%2Fapplications%2Fabacustest%2Fdatasets%2Fsemi-conductor\">link</a>",
+            "properties": "band gap"
+        },
+        "content": [
+            {
+                "type": "head1",
+                "content": "1. Introduction"
+            },
+            {
+                "type": "text",
+                "content": [
+                    "The bandgap is a key parameter for semiconductor systems, and in this test, we employed the ABACUS package in conjunction with the HSE hybrid functional to calculate the bandgaps of a series of typical semiconductors. Furthermore, we compared the results between abacus and reference HSE and experimental values. The reference values (QE/VASP/FHI-AIMS) are obtained from the following sources: 10.1021/acs.jpclett.8b00919 and 10.1021/acs.jpclett.0c00481.",
+                    "ABACUS and QE employ the SG15-type norm-conserving PBE pseudopotentials (except for In is PSlibrary norm-conserving), vasp employs the PBE PAW potentials, whereas all-electron calculations are done with fhi-aims. The input files of ABACUS can be downloaded by accessing the link on Datasets at the beginning."
+                ]
+            },
+            {
+                "type": "head1",
+                "content": "2. Results"
+            },
+            {
+                "type": "image",
+                "content": "all-percent.png",
+                "title": "Figure 1. Band gap of each system calculated by different softwares and experimental values, and the relative error from experimental values."
+            },
+            {
+                "type": "text",
+                "content": [
+                    "The band gap of each system, calculated by ABACUS, along with the reference computed values from other software and experimental values, is presented in the following table. <strong>comp_ref_mean</strong> is the average of values obtained from QE, FHI-AIMS, and VASP. <strong>RE(Exp,%)</strong> represents the relative deviation of ABACUS from the experimental value. <strong>RE(comp_ref_mean,%)</strong> represents the relative deviation of ABACUS from the comp_ref_mean."
+                ]
+            },
+            {
+                "type": "metrics",
+                "content": "report.json",
+                "title": "Table 1.Band gap (eV) of each system, calculated by different softwares and experimental values.",
+                "criteria": {
+                    "RE(comp_ref_mean,%)": "abs(x) < 10"
+                }
+            }
+        ]
+    }
+}

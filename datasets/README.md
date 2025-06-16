@@ -7,3 +7,4 @@ dataset2-lcao|performance test of LCAO basis
 dataset3-exx|performance test of exx test
 battery|battery test
 alloy|alloy test
+semi-conductor|Accuracy test of semi-conductor by HSE
